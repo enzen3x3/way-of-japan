@@ -279,14 +279,6 @@ export default function App() {
 
           {/* Usage counter */}
 
-            <div className="kokoro-fixed">
-              <button className="kokoro-toggle" onClick={() => setUseReal(!useReal)}>
-                🔄
-              </button>
-              <img src={kokoroImg} alt="Kokoro" className="kokoro-img" />
-            </div>
-          </div>
-
           {mode === "quick" && (
             <div className="usage-bar">{t.freeLeft(DAILY_LIMIT - dailyCount, DAILY_LIMIT)}</div>
           )}
