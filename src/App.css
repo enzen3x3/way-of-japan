@@ -117,6 +117,7 @@ body {
   display: flex;
   overflow: hidden;
   min-height: 0;
+  height: 0;
 }
 
 /* Left Column */
