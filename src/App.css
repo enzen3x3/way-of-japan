@@ -188,6 +188,7 @@ body {
   border-bottom-left-radius: 4px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   border: 1px solid var(--pink-light);
+  text-align: left;
 }
 
 .bubble.assistant::before {
@@ -204,6 +205,7 @@ body {
   background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
   color: var(--white);
   border-bottom-right-radius: 4px;
+  text-align: left;
 }
 
 .bubble.user::after {
@@ -251,7 +253,6 @@ body {
   object-fit: contain;
   object-position: top;
   filter: drop-shadow(0 4px 12px rgba(232,164,184,0.4));
-  transform: scaleX(-1);
 }
 
 /* Usage Bar */
