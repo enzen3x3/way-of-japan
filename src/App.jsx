@@ -81,6 +81,28 @@ export default function App() {
     }
   }
 
+  // シーンボタンはカウントなしで送信
+  async function sendScene(query) {
+    const newMessages = [...messages, { role: "user", content: query }];
+    setMessages(newMessages);
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: newMessages, mode, language }),
+      });
+      const data = await res.json();
+      const reply = data.content?.[0]?.text || "Sorry, I couldn't understand that. Please try again!";
+      setMessages([...newMessages, { role: "assistant", content: reply }]);
+    } catch {
+      setMessages([...newMessages, { role: "assistant", content: "Gomen nasai! Something went wrong. Please try again 🙏" }]);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="app">
       {/* Header */}
@@ -107,9 +129,6 @@ export default function App() {
         <button className={`mode-btn ${screen === "camera" ? "active" : ""}`} onClick={() => setScreen(screen === "camera" ? "chat" : "camera")}>
           📷 Translate
         </button>
-        <button className={`mode-btn ${useReal ? "active" : ""}`} onClick={() => setUseReal(!useReal)}>
-          {useReal ? "👘 Real" : "🎎 Chibi"}
-        </button>
       </div>
 
       {screen === "chat" ? (
@@ -117,7 +136,7 @@ export default function App() {
           {/* Scene Buttons */}
           <div className="scene-buttons">
             {SCENE_BUTTONS.map((s) => (
-              <button key={s.label} className="scene-btn" onClick={() => sendMessage(s.query)}>
+              <button key={s.label} className="scene-btn" onClick={() => sendScene(s.query)}>
                 {s.emoji} {s.label}
               </button>
             ))}
@@ -125,7 +144,6 @@ export default function App() {
 
           {/* Chat + Kokoro */}
           <div className="chat-wrapper">
-            {/* Chat messages */}
             <div className="chat-area">
               {messages.map((msg, i) => (
                 <div key={i} className={`message-row ${msg.role}`}>
@@ -140,8 +158,11 @@ export default function App() {
               <div ref={bottomRef} />
             </div>
 
-            {/* Kokoro fixed bottom left */}
+            {/* Kokoro固定左下・切り替えボタン付き */}
             <div className="kokoro-fixed">
+              <button className="kokoro-toggle" onClick={() => setUseReal(!useReal)}>
+                {useReal ? "🎎" : "👘"}
+              </button>
               <img src={kokoroImg} alt="Kokoro" className="kokoro-img" />
             </div>
           </div>

@@ -51,11 +51,12 @@ body {
 }
 
 .header-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 24px;
-  font-weight: 700;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
   color: var(--text);
-  letter-spacing: 0.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .header-subtitle {
@@ -149,11 +150,12 @@ body {
 .chat-area {
   flex: 1;
   overflow-y: auto;
-  padding: 16px 16px 16px 180px;
+  padding: 16px 16px 16px 16px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   background: var(--beige);
+  padding-bottom: 240px;
 }
 
 /* Message Rows */
@@ -224,10 +226,23 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 170px;
+  width: 160px;
   pointer-events: none;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
+}
+
+.kokoro-toggle {
+  pointer-events: all;
+  background: var(--white);
+  border: 1.5px solid var(--pink);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .kokoro-img {
@@ -236,6 +251,7 @@ body {
   object-fit: contain;
   object-position: top;
   filter: drop-shadow(0 4px 12px rgba(232,164,184,0.4));
+  transform: scaleX(-1);
 }
 
 /* Usage Bar */
