@@ -174,8 +174,8 @@ body {
 }
 
 .kokoro-img {
-  width: 200px;
-  height: 260px;
+  width: 160px;
+  height: 210px;
   object-fit: contain;
   object-position: top;
   filter: drop-shadow(0 4px 12px rgba(232,164,184,0.4));
