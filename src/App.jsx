@@ -243,15 +243,25 @@ export default function App() {
 
       {screen === "chat" ? (
         <>
-          <div className="scene-buttons">
-            {t.scenes.map((s) => (
-              <button key={s.label} className="scene-btn" onClick={() => sendScene(s.query)}>
-                {s.emoji} {s.label}
-              </button>
-            ))}
-          </div>
 
-          <div className="chat-wrapper">
+          <div className="main-layout">
+            {/* 左カラム */}
+            <div className="left-col">
+              <div className="scene-buttons-vertical">
+                {t.scenes.map((s) => (
+                  <button key={s.label} className="scene-btn-vertical" onClick={() => sendScene(s.query)}>
+                    <span className="scene-btn-emoji">{s.emoji}</span>
+                    <span>{s.label}</span>
+                  </button>
+                ))}
+              </div>
+              <div className="kokoro-left">
+                <button className="kokoro-toggle" onClick={() => setUseReal(!useReal)}>🔄</button>
+                <img src={kokoroImg} alt="Kokoro" className="kokoro-img" />
+              </div>
+            </div>
+
+            {/* 右カラム - チャット */}
             <div className="chat-area">
               {messages.map((msg, i) => (
                 <div key={i} className={`message-row ${msg.role}`}>
@@ -265,6 +275,9 @@ export default function App() {
               )}
               <div ref={bottomRef} />
             </div>
+          </div>
+
+          {/* Usage counter */}
 
             <div className="kokoro-fixed">
               <button className="kokoro-toggle" onClick={() => setUseReal(!useReal)}>
