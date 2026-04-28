@@ -113,7 +113,7 @@ body {
 .main-layout {
   flex: 1;
   display: flex;
-  overflow: visible;
+  overflow: hidden;
   min-height: 0;
 }
 
@@ -211,6 +211,7 @@ body {
   justify-content: flex-end;
   gap: 10px;
   background: var(--beige);
+  min-height: 0;
 }
 
 .message-row {
