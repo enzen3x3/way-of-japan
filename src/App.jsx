@@ -265,7 +265,26 @@ export default function App() {
             <div className="chat-area">
               {messages.map((msg, i) => (
                 <div key={i} className={`message-row ${msg.role}`}>
-                  <div className={`bubble ${msg.role}`}>{msg.content}</div>
+                  <div className={`bubble ${msg.role}`}>
+                    {msg.content.split('\n').map((line, j) => {
+                      if (line === '') return <div key={j} style={{height: '8px'}} />;
+                      const isBold = line.startsWith('## ') || line.startsWith('**');
+                      const cleaned = line.replace(/^##\s*/, '').replace(/\*\*(.*?)\*\*/g, '$1');
+                      const isBullet = line.startsWith('- ');
+                      const bulletText = isBullet ? cleaned.replace(/^-\s*/, '') : cleaned;
+                      if (isBullet) {
+                        return (
+                          <p key={j} style={{margin: '2px 0', paddingLeft: '12px', borderLeft: '2px solid #e8a4b8'}}>
+                            {bulletText}
+                          </p>
+                        );
+                      }
+                      if (isBold) {
+                        return <p key={j} style={{margin: '6px 0 2px', fontWeight: '700', color: '#c4758f'}}>{cleaned}</p>;
+                      }
+                      return <p key={j} style={{margin: '2px 0'}}>{cleaned}</p>;
+                    })}
+                  </div>
                 </div>
               ))}
               {loading && (
