@@ -172,11 +172,12 @@ body {
 }
 
 .kokoro-img {
-  width: 76px;
-  height: 100px;
+  width: 140px;
+  height: 180px;
   object-fit: contain;
   object-position: top;
   filter: drop-shadow(0 4px 12px rgba(232,164,184,0.4));
+  margin-left: -30px;
 }
 
 .kokoro-toggle {
