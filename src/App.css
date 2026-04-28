@@ -38,7 +38,7 @@ body {
 /* Header */
 .header {
   background: linear-gradient(135deg, #f7dce6 0%, #fdf6f0 100%);
-  padding: 16px 20px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -52,17 +52,20 @@ body {
 
 .header-title {
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   color: var(--text);
   letter-spacing: 2px;
   text-transform: uppercase;
+  line-height: 1;
 }
 
 .header-subtitle {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--pink-dark);
   letter-spacing: 1px;
+  line-height: 1;
+  margin-top: 2px;
 }
 
 .lang-select {
