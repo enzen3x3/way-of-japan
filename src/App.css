@@ -28,8 +28,7 @@ body {
 .app {
   max-width: 480px;
   margin: 0 auto;
-  height: 100vh;
-  max-height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--white);
@@ -113,11 +112,10 @@ body {
 
 /* Main Layout */
 .main-layout {
-  flex: 1;
   display: flex;
-  overflow: hidden;
+  flex: 1;
   min-height: 0;
-  height: 0;
+  overflow: hidden;
 }
 
 /* Left Column */
@@ -209,14 +207,13 @@ body {
 /* Right Column - Chat */
 .chat-area {
   flex: 1;
+  min-height: 0;
   overflow-y: scroll;
   padding: 12px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   gap: 10px;
   background: var(--beige);
-  min-height: 0;
 }
 
 .message-row {
