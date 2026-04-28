@@ -4,7 +4,6 @@ export default async function handler(req, res) {
   }
 
   const { messages, mode, language } = req.body
-
   const systemPrompt = getSystemPrompt(mode, language)
 
   try {
@@ -19,13 +18,25 @@ export default async function handler(req, res) {
         model: 'claude-sonnet-4-5',
         max_tokens: mode === 'deep' ? 1024 : 512,
         system: systemPrompt,
-        messages: messages
+        messages: messages.map(m => ({
+          role: m.role,
+          content: typeof m.content === 'string' ? m.content : m.content
+        }))
       })
     })
 
+    if (!response.ok) {
+      const errData = await response.json()
+      console.error('Anthropic error:', errData)
+      return res.status(500).json({ error: errData })
+    }
+
     const data = await response.json()
+    console.log('Anthropic response:', JSON.stringify(data))
     return res.status(200).json(data)
+
   } catch (error) {
+    console.error('Handler error:', error)
     return res.status(500).json({ error: error.message })
   }
 }
