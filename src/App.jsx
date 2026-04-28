@@ -268,7 +268,7 @@ export default function App() {
 
             <div className="kokoro-fixed">
               <button className="kokoro-toggle" onClick={() => setUseReal(!useReal)}>
-                {useReal ? "🎎" : "👘"}
+                🔄
               </button>
               <img src={kokoroImg} alt="Kokoro" className="kokoro-img" />
             </div>
