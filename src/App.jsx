@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import "./App.css";
 
-const CHIBI_IMG = "/images/kokoro-chibi.png";
-
 const SCENE_BUTTONS = [
   { emoji: "🍜", label: "Dining", query: "What are the dining etiquette rules in Japan?" },
   { emoji: "🚃", label: "Train", query: "What are the rules and etiquette on Japanese trains?" },
@@ -40,8 +38,11 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [dailyCount, setDailyCount] = useState(getDailyCount());
   const [showPaywall, setShowPaywall] = useState(false);
-  const [screen, setScreen] = useState("chat"); // chat | camera
+  const [screen, setScreen] = useState("chat");
+  const [useReal, setUseReal] = useState(false);
   const bottomRef = useRef(null);
+
+  const kokoroImg = useReal ? "/images/kokoro-real.png" : "/images/kokoro-chibi.png";
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -68,11 +69,7 @@ export default function App() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: newMessages,
-          mode,
-          language,
-        }),
+        body: JSON.stringify({ messages: newMessages, mode, language }),
       });
       const data = await res.json();
       const reply = data.content?.[0]?.text || "Sorry, I couldn't understand that. Please try again!";
@@ -89,11 +86,8 @@ export default function App() {
       {/* Header */}
       <header className="header">
         <div className="header-left">
-          <img src="/images/kokoro-real.png" alt="Kokoro" className="header-avatar" />
-          <div>
-            <h1 className="header-title">Way of Japan</h1>
-            <p className="header-subtitle">Your Cultural Guide 🌸</p>
-          </div>
+          <h1 className="header-title">Way of Japan</h1>
+          <p className="header-subtitle">Your Cultural Guide 🌸</p>
         </div>
         <select className="lang-select" value={language} onChange={(e) => setLanguage(e.target.value)}>
           <option value="en">🇺🇸 EN</option>
@@ -113,6 +107,9 @@ export default function App() {
         <button className={`mode-btn ${screen === "camera" ? "active" : ""}`} onClick={() => setScreen(screen === "camera" ? "chat" : "camera")}>
           📷 Translate
         </button>
+        <button className={`mode-btn ${useReal ? "active" : ""}`} onClick={() => setUseReal(!useReal)}>
+          {useReal ? "👘 Real" : "🎎 Chibi"}
+        </button>
       </div>
 
       {screen === "chat" ? (
@@ -126,23 +123,27 @@ export default function App() {
             ))}
           </div>
 
-          {/* Chat */}
-          <div className="chat-area">
-            {messages.map((msg, i) => (
-              <div key={i} className={`message-row ${msg.role}`}>
-                {msg.role === "assistant" && (
-                  <img src={CHIBI_IMG} alt="Kokoro" className="chibi" />
-                )}
-                <div className={`bubble ${msg.role}`}>{msg.content}</div>
-              </div>
-            ))}
-            {loading && (
-              <div className="message-row assistant">
-                <img src={CHIBI_IMG} alt="Kokoro" className="chibi" />
-                <div className="bubble assistant typing">Kokoro is thinking... 🌸</div>
-              </div>
-            )}
-            <div ref={bottomRef} />
+          {/* Chat + Kokoro */}
+          <div className="chat-wrapper">
+            {/* Chat messages */}
+            <div className="chat-area">
+              {messages.map((msg, i) => (
+                <div key={i} className={`message-row ${msg.role}`}>
+                  <div className={`bubble ${msg.role}`}>{msg.content}</div>
+                </div>
+              ))}
+              {loading && (
+                <div className="message-row assistant">
+                  <div className="bubble assistant typing">Kokoro is thinking... 🌸</div>
+                </div>
+              )}
+              <div ref={bottomRef} />
+            </div>
+
+            {/* Kokoro fixed bottom left */}
+            <div className="kokoro-fixed">
+              <img src={kokoroImg} alt="Kokoro" className="kokoro-img" />
+            </div>
           </div>
 
           {/* Usage counter */}
@@ -172,7 +173,7 @@ export default function App() {
       {showPaywall && (
         <div className="modal-overlay" onClick={() => setShowPaywall(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <img src={CHIBI_IMG} alt="Kokoro" className="modal-chibi" />
+            <img src="/images/kokoro-chibi.png" alt="Kokoro" className="modal-chibi" />
             <h2>Daily limit reached! 🌸</h2>
             <p>You've used all 5 free messages for today.</p>
             <div className="modal-plans">
@@ -249,7 +250,7 @@ function CameraScreen({ language, setScreen, setMessages, messages }) {
       });
       const data = await res.json();
       const reply = data.content?.[0]?.text || "I couldn't analyze this image.";
-      setMessages([...messages, { role: "assistant", content: `📷 **Camera Translation:**\n\n${reply}` }]);
+      setMessages([...messages, { role: "assistant", content: `📷 Camera Translation:\n\n${reply}` }]);
       setScreen("chat");
     } catch {
       alert("Analysis failed. Please try again.");
