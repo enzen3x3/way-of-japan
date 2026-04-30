@@ -272,6 +272,17 @@ body {
   flex-shrink: 0;
 }
 
+.accordion-back {
+  background: none;
+  border: none;
+  color: var(--pink-dark);
+  font-size: 12px;
+  cursor: pointer;
+  margin-bottom: 6px;
+  padding: 0;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
 .accordion-title {
   font-size: 13px;
   font-weight: 600;
@@ -390,6 +401,22 @@ body {
   padding: 12px;
   background: var(--white);
   border-top: 2px solid var(--pink-light);
+}
+
+.cam-inline-btn {
+  padding: 10px 12px;
+  background: var(--beige-dark);
+  border: none;
+  border-radius: 24px;
+  font-size: 16px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.chat-captured-img {
+  max-width: 80%;
+  border-radius: 12px;
+  margin: 4px 0;
 }
 
 .input {
