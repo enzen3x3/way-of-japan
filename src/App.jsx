@@ -490,6 +490,10 @@ export default function App() {
   }, [messages]);
 
   useEffect(() => {
+  setDailyCount(getDailyCount());
+}, []);
+
+  useEffect(() => {
     saveMessages(messages);
   }, [messages]);
 
@@ -800,7 +804,7 @@ export default function App() {
 
       <div className="input-area">
         {mode === "quick" && (
-          <div className="count-badge">{DAILY_LIMIT - dailyCount}/{DAILY_LIMIT}</div>
+          <div className="count-badge">{Math.max(0, DAILY_LIMIT - dailyCount)}/{DAILY_LIMIT}</div>
         )}
         <input
           className="input"
