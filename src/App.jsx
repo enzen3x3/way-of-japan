@@ -417,19 +417,30 @@ const TRANSLATIONS = {
 const DAILY_LIMIT = 5;
 
 function getDailyCount() {
-  const today = new Date().toDateString();
-  const stored = JSON.parse(localStorage.getItem("woj_usage") || "{}");
-  if (stored.date !== today) return 0;
-  return stored.count || 0;
+  try {
+    const today = new Date().toDateString();
+    const stored = JSON.parse(localStorage.getItem("woj_usage") || "{}");
+    if (stored.date !== today) {
+      localStorage.setItem("woj_usage", JSON.stringify({ date: today, count: 0 }));
+      return 0;
+    }
+    return Math.min(stored.count || 0, DAILY_LIMIT);
+  } catch {
+    return 0;
+  }
 }
 
 function incrementDailyCount() {
-  const today = new Date().toDateString();
-  const current = getDailyCount();
-  if (current >= DAILY_LIMIT) return DAILY_LIMIT;
-  const count = current + 1;
-  localStorage.setItem("woj_usage", JSON.stringify({ date: today, count }));
-  return count;
+  try {
+    const today = new Date().toDateString();
+    const current = getDailyCount();
+    if (current >= DAILY_LIMIT) return DAILY_LIMIT;
+    const count = current + 1;
+    localStorage.setItem("woj_usage", JSON.stringify({ date: today, count }));
+    return count;
+  } catch {
+    return 0;
+  }
 }
 
 function saveMessages(msgs) {
