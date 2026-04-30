@@ -721,6 +721,11 @@ export default function App() {
   const [openScene, setOpenScene] = useState(null);
   const [openOther, setOpenOther] = useState(null);
   const [showOtherList, setShowOtherList] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
+  const [cameraStream, setCameraStream] = useState(null);
+  const [capturedImg, setCapturedImg] = useState(null);
+  const videoRef2 = useRef(null);
+  const canvasRef2 = useRef(null);
   const bottomRef = useRef(null);
   const kokoroImg = useReal ? "/images/kokoro-real.png" : "/images/kokoro-chibi.png";
 
@@ -735,6 +740,22 @@ export default function App() {
   useEffect(() => {
     setMessages([{ role: "assistant", content: TRANSLATIONS[language].greeting }]);
   }, [language]);
+  useEffect(() => {
+    if (showCamera) {
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+        .then((stream) => {
+          setCameraStream(stream);
+          if (videoRef2.current) videoRef2.current.srcObject = stream;
+        })
+        .catch(() => alert("Camera access denied."));
+    } else {
+      if (cameraStream) {
+        cameraStream.getTracks().forEach((t) => t.stop());
+        setCameraStream(null);
+      }
+      setCapturedImg(null);
+    }
+  }, [showCamera]);
 
   async function sendMessage(text) {
     const userText = text || input.trim();
@@ -898,6 +919,62 @@ export default function App() {
 
               {/* カメラがチャット内に統合 */}
               {screen === "camera" ? null : (
+                {showCamera && (
+  <div className="inline-camera">
+    {!capturedImg ? (
+      <>
+        <video ref={videoRef2} autoPlay playsInline className="inline-video" />
+        <button className="inline-capture-btn" onClick={() => {
+          const canvas = canvasRef2.current;
+          const video = videoRef2.current;
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          canvas.getContext("2d").drawImage(video, 0, 0);
+          const dataUrl = canvas.toDataURL("image/jpeg", 0.8);
+          const base64 = dataUrl.split(",")[1];
+          setCapturedImg({ dataUrl, base64 });
+          cameraStream?.getTracks().forEach((t) => t.stop());
+        }}>⬤ {t.capture}</button>
+        <canvas ref={canvasRef2} style={{ display: "none" }} />
+      </>
+    ) : (
+      <>
+        <img src={capturedImg.dataUrl} alt="captured" className="inline-preview" />
+        <div className="inline-camera-btns">
+          <button className="cam-btn" onClick={async () => {
+            const imgMsg = { role: "user", type: "image", content: capturedImg.dataUrl };
+            const newMessages = [...messages, imgMsg];
+            setMessages(newMessages);
+            setShowCamera(false);
+            setCapturedImg(null);
+            setLoading(true);
+            try {
+              const res = await fetch("/api/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  messages: [{ role: "user", content: [
+                    { type: "image", source: { type: "base64", media_type: "image/jpeg", data: capturedImg.base64 } },
+                    { type: "text", text: "Please translate any Japanese text in this image and explain the cultural context." },
+                  ]}],
+                  mode: "deep", language,
+                }),
+              });
+              const data = await res.json();
+              const reply = data.content?.[0]?.text || "I couldn't analyze this image.";
+              setMessages([...newMessages, { role: "assistant", content: reply }]);
+            } catch {
+              setMessages([...newMessages, { role: "assistant", content: t.error }]);
+            } finally {
+              setLoading(false);
+            }
+          }}>{t.analyze}</button>
+          <button className="cam-btn secondary" onClick={() => setCapturedImg(null)}>{t.retake}</button>
+        </div>
+      </>
+    )}
+  </div>
+)}
                 <div className="chat-area">
                   {messages.map((msg, i) => (
                     <div key={i} className={`message-row ${msg.role}`}>
@@ -931,7 +1008,7 @@ export default function App() {
               onKeyDown={(e) => e.key === "Enter" && sendMessage()}
               placeholder={t.placeholder}
             />
-            <button className="cam-inline-btn" onClick={() => setScreen("camera")}>📷</button>
+            <button className="cam-inline-btn" onClick={() => setShowCamera(!showCamera)}>📷</button>
             <button className="send-btn" onClick={() => sendMessage()}>{t.send}</button>
           </div>
         </>
