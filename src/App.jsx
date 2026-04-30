@@ -653,14 +653,14 @@ export default function App() {
           <option value="th">🇹🇭 TH</option>
           <option value="fr">🇫🇷 FR</option>
         </select>
-         {import.meta.env.DEV && (
-          <button
-            onClick={() => { localStorage.clear(); setDailyCount(0); }}
-            style={{ fontSize: '10px', padding: '2px 6px', background: '#ff6b6b', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-          >
-            DEV Reset
-          </button>
-        )}
+         {(import.meta.env.DEV || import.meta.env.VITE_DEV_MODE === 'true') && (
+  <button
+    onClick={() => { localStorage.clear(); setDailyCount(0); }}
+    style={{ fontSize: '10px', padding: '2px 6px', background: '#ff6b6b', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+  >
+    DEV Reset
+  </button>
+)}
       </header>
 
       <div className="mode-toggle">
