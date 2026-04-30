@@ -431,7 +431,9 @@ function getDailyCount() {
 
 function incrementDailyCount() {
   const today = new Date().toDateString();
-  const count = getDailyCount() + 1;
+  const current = getDailyCount();
+  if (current >= DAILY_LIMIT) return DAILY_LIMIT;
+  const count = current + 1;
   localStorage.setItem("woj_usage", JSON.stringify({ date: today, count }));
   return count;
 }

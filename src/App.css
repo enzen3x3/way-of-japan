@@ -153,6 +153,7 @@ body {
   min-height: 0;
   overflow: hidden;
   background: var(--beige);
+  min-width: 0;
 }
 
 /* Left Column */
