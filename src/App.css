@@ -119,6 +119,33 @@ body {
   overflow: hidden;
 }
 
+.left-col {
+  width: 80px;
+  background: var(--beige);
+  border-right: 1px solid var(--beige-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0 0 0;
+  flex-shrink: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.left-col::-webkit-scrollbar {
+  display: none;
+}
+
+.right-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--beige);
+}
+
 /* Left Column */
 .left-col {
   width: 80px;
@@ -181,23 +208,20 @@ body {
 
 /* Kokoro左下 */
 .kokoro-left {
-  flex: 1;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   align-items: center;
-  position: relative;
   width: 100%;
-  overflow: visible;
+  padding-top: 8px;
 }
 
 .kokoro-img {
-  width: 160px;
-  height: 210px;
+  width: 76px;
+  height: 100px;
   object-fit: contain;
   object-position: top;
   filter: drop-shadow(0 4px 12px rgba(232,164,184,0.4));
-  margin-left: 30px;
 }
 
 .kokoro-toggle {
