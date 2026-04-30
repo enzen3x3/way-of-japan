@@ -541,11 +541,20 @@ export default function App() {
   setOpenScene(null);
   setOpenOther(null);
   setShowOtherList(false);
+
+  const currentCount = getDailyCount();
+  if (mode === "quick" && currentCount >= DAILY_LIMIT) {
+    setShowPaywall(true);
+    return;
+  }
+
   const newMessages = [...messages, { role: "user", content: query }];
   setMessages(newMessages);
   setLoading(true);
-  incrementDailyCount();
-  setDailyCount(getDailyCount());
+
+  const newCount = incrementDailyCount();
+  setDailyCount(newCount);
+
   try {
     const res = await fetch("/api/chat", {
       method: "POST",
@@ -753,23 +762,23 @@ export default function App() {
       </div>
 
       <div className="usage-bar">
-  {mode === "quick" && (
-    <span>{t.freeLeft(DAILY_LIMIT - dailyCount, DAILY_LIMIT)}</span>
-  )}
   <span className="disclaimer">⚠️ AI responses are for reference only. Always verify with local sources.</span>
 </div>
 
       <div className="input-area">
-        <input
-          className="input"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-          placeholder={t.placeholder}
-        />
-        <button className="cam-inline-btn" onClick={() => setShowCamera(!showCamera)}>📷</button>
-        <button className="send-btn" onClick={() => sendMessage()}>{t.send}</button>
-      </div>
+  {mode === "quick" && (
+    <div className="count-badge">{DAILY_LIMIT - dailyCount}/{DAILY_LIMIT}</div>
+  )}
+  <input
+    className="input"
+    value={input}
+    onChange={(e) => setInput(e.target.value)}
+    onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+    placeholder={t.placeholder}
+  />
+  <button className="cam-inline-btn" onClick={() => setShowCamera(!showCamera)}>📷</button>
+  <button className="send-btn" onClick={() => sendMessage()}>{t.send}</button>
+</div>
 
       {showPaywall && (
         <div className="modal-overlay" onClick={() => setShowPaywall(false)}>

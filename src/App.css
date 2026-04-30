@@ -692,3 +692,24 @@ body {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.chat-count-badge {
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-light);
+  padding: 8px;
+  background: var(--pink-light);
+  border-radius: 12px;
+  margin-top: 4px;
+}
+
+.count-badge {
+  background: var(--pink);
+  color: var(--white);
+  border-radius: 20px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
