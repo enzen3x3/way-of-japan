@@ -666,7 +666,11 @@ export default function App() {
         </select>
          {(import.meta.env.DEV || import.meta.env.VITE_DEV_MODE === 'true') && (
   <button
-    onClick={() => { localStorage.clear(); setDailyCount(0); }}
+    onClick={() => { 
+      localStorage.clear(); 
+      setDailyCount(0);
+      window.location.reload();
+    }}
     style={{ fontSize: '10px', padding: '2px 6px', background: '#ff6b6b', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
   >
     DEV Reset
