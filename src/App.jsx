@@ -36,12 +36,6 @@ const SCENE_DATA = {
       { emoji: "🏪", label: "Convenience", query: "How do I use a Japanese convenience store?" },
       { emoji: "🏬", label: "Department", query: "What are the etiquette rules at Japanese department stores?" },
     ]},
-    { emoji: "🎭", label: "Tradition", sub: [
-      { emoji: "🍵", label: "Tea Ceremony", query: "How do I participate in a Japanese tea ceremony?" },
-      { emoji: "👘", label: "Kimono", query: "How do I wear and behave in a kimono in Japan?" },
-      { emoji: "🧘", label: "Zazen", query: "What should I know about zazen meditation in Japan?" },
-      { emoji: "✍️", label: "Calligraphy", query: "What should I know about Japanese calligraphy experience?" },
-    ]},
     { emoji: "🏥", label: "Emergency", sub: [
       { emoji: "🏥", label: "Hospital", query: "How do I use a hospital in Japan as a foreigner?" },
       { emoji: "👮", label: "Police", query: "How do I contact the police in Japan as a foreigner?" },
@@ -81,12 +75,6 @@ const SCENE_DATA = {
       { emoji: "💴", label: "百元店", query: "关于日本百元店需要了解什么？" },
       { emoji: "🏪", label: "便利店", query: "如何使用日本便利店？" },
       { emoji: "🏬", label: "百货店", query: "在日本百货店有哪些礼仪？" },
-    ]},
-    { emoji: "🎭", label: "传统体验", sub: [
-      { emoji: "🍵", label: "茶道", query: "如何参加日本茶道体验？" },
-      { emoji: "👘", label: "和服", query: "穿和服时有哪些注意事项？" },
-      { emoji: "🧘", label: "坐禅", query: "关于日本坐禅冥想需要了解什么？" },
-      { emoji: "✍️", label: "书道", query: "关于日本书法体验需要了解什么？" },
     ]},
     { emoji: "🏥", label: "紧急情况", sub: [
       { emoji: "🏥", label: "医院", query: "外国人如何在日本使用医院？" },
@@ -128,12 +116,6 @@ const SCENE_DATA = {
       { emoji: "🏪", label: "편의점", query: "일본 편의점 이용 방법은?" },
       { emoji: "🏬", label: "백화점", query: "일본 백화점에서의 예절은?" },
     ]},
-    { emoji: "🎭", label: "전통체험", sub: [
-      { emoji: "🍵", label: "다도", query: "일본 다도 체험에 참가하는 방법은?" },
-      { emoji: "👘", label: "기모노", query: "기모노를 입을 때 주의사항은?" },
-      { emoji: "🧘", label: "좌선", query: "일본 좌선 명상에 대해 알아야 할 것은?" },
-      { emoji: "✍️", label: "서도", query: "일본 서예 체험에 대해 알아야 할 것은?" },
-    ]},
     { emoji: "🏥", label: "긴급상황", sub: [
       { emoji: "🏥", label: "병원", query: "외국인이 일본에서 병원을 이용하는 방법은?" },
       { emoji: "👮", label: "경찰", query: "일본에서 경찰에 연락하는 방법은?" },
@@ -146,6 +128,12 @@ const SCENE_DATA = {
 const OTHER_SCENES = {
   "zh-tw": [], th: [], fr: [],
   en: [
+    { emoji: "🎭", label: "Tradition", sub: [
+      { emoji: "🍵", label: "Tea Ceremony", query: "How do I participate in a Japanese tea ceremony?" },
+      { emoji: "👘", label: "Kimono", query: "How do I wear and behave in a kimono in Japan?" },
+      { emoji: "🧘", label: "Zazen", query: "What should I know about zazen meditation in Japan?" },
+      { emoji: "✍️", label: "Calligraphy", query: "What should I know about Japanese calligraphy experience?" },
+    ]},
     { emoji: "🚕", label: "Taxi", sub: [
       { emoji: "🚕", label: "How to use", query: "How do I use a taxi in Japan?" },
       { emoji: "💴", label: "Fare", query: "How much do taxis cost in Japan?" },
@@ -204,6 +192,12 @@ const OTHER_SCENES = {
     ]},
   ],
   zh: [
+    { emoji: "🎭", label: "传统体验", sub: [
+      { emoji: "🍵", label: "茶道", query: "如何参加日本茶道体验？" },
+      { emoji: "👘", label: "和服", query: "穿和服时有哪些注意事项？" },
+      { emoji: "🧘", label: "坐禅", query: "关于日本坐禅冥想需要了解什么？" },
+      { emoji: "✍️", label: "书道", query: "关于日本书法体验需要了解什么？" },
+    ]},
     { emoji: "🚕", label: "出租车", sub: [
       { emoji: "🚕", label: "使用方法", query: "如何在日本使用出租车？" },
       { emoji: "💴", label: "费用", query: "日本出租车费用是多少？" },
@@ -262,6 +256,12 @@ const OTHER_SCENES = {
     ]},
   ],
   ko: [
+    { emoji: "🎭", label: "전통체험", sub: [
+      { emoji: "🍵", label: "다도", query: "일본 다도 체험에 참가하는 방법은?" },
+      { emoji: "👘", label: "기모노", query: "기모노를 입을 때 주의사항은?" },
+      { emoji: "🧘", label: "좌선", query: "일본 좌선 명상에 대해 알아야 할 것은?" },
+      { emoji: "✍️", label: "서도", query: "일본 서예 체험에 대해 알아야 할 것은?" },
+    ]},
     { emoji: "🚕", label: "택시", sub: [
       { emoji: "🚕", label: "이용방법", query: "일본에서 택시 이용 방법은?" },
       { emoji: "💴", label: "요금", query: "일본 택시 요금은 얼마인가요?" },
@@ -334,7 +334,6 @@ const TRANSLATIONS = {
     getWeekly: "Get Weekly Pass", getMonthly: "Get Monthly", maybeLater: "Maybe later",
     greeting: "Konnichiwa! 🌸 I'm Kokoro, your Japanese culture guide. Ask me anything about Japan — customs, food, travel tips, and more!",
     other: "More", capture: "⬤ Capture", analyze: "🔍 Analyze", retake: "Retake",
-    thinking2: "Kokoro is reading... 🌸",
     error: "Gomen nasai! Something went wrong. Please try again 🙏",
     sorry: "Sorry, I couldn't understand that. Please try again!",
   },
@@ -350,7 +349,6 @@ const TRANSLATIONS = {
     getWeekly: "获取周卡", getMonthly: "获取月卡", maybeLater: "稍后再说",
     greeting: "你好！🌸 我是Kokoro，您的日本文化向导。随时向我询问关于日本的任何问题！",
     other: "更多", capture: "⬤ 拍照", analyze: "🔍 分析", retake: "重拍",
-    thinking2: "Kokoro正在阅读... 🌸",
     error: "对不起！出了点问题，请再试一次 🙏",
     sorry: "抱歉，我没能理解。请再试一次！",
   },
@@ -366,7 +364,6 @@ const TRANSLATIONS = {
     getWeekly: "주간 패스 구매", getMonthly: "월간 구매", maybeLater: "나중에",
     greeting: "안녕하세요! 🌸 저는 Kokoro, 일본 문화 가이드입니다. 무엇이든 물어보세요!",
     other: "더보기", capture: "⬤ 촬영", analyze: "🔍 분석", retake: "다시 찍기",
-    thinking2: "Kokoro가 읽는 중... 🌸",
     error: "죄송합니다! 문제가 발생했습니다. 다시 시도해주세요 🙏",
     sorry: "죄송합니다, 이해하지 못했습니다. 다시 시도해주세요!",
   },
@@ -382,7 +379,6 @@ const TRANSLATIONS = {
     getWeekly: "購買週票", getMonthly: "購買月票", maybeLater: "稍後再說",
     greeting: "你好！🌸 我是Kokoro，您的日本文化嚮導。隨時向我詢問關於日本的任何問題！",
     other: "更多", capture: "⬤ 拍照", analyze: "🔍 分析", retake: "重拍",
-    thinking2: "Kokoro正在閱讀... 🌸",
     error: "對不起！出了點問題，請再試一次 🙏",
     sorry: "抱歉，我沒能理解。請再試一次！",
   },
@@ -398,7 +394,6 @@ const TRANSLATIONS = {
     getWeekly: "ซื้อพาสรายสัปดาห์", getMonthly: "ซื้อรายเดือน", maybeLater: "ไว้ทีหลัง",
     greeting: "สวัสดี! 🌸 ฉันคือ Kokoro ไกด์วัฒนธรรมญี่ปุ่นของคุณ ถามฉันได้ทุกเรื่องเกี่ยวกับญี่ปุ่น!",
     other: "เพิ่มเติม", capture: "⬤ ถ่ายภาพ", analyze: "🔍 วิเคราะห์", retake: "ถ่ายใหม่",
-    thinking2: "Kokoro กำลังอ่าน... 🌸",
     error: "ขอโทษ! เกิดข้อผิดพลาด กรุณาลองใหม่ 🙏",
     sorry: "ขอโทษ ฉันไม่เข้าใจ กรุณาลองใหม่!",
   },
@@ -414,7 +409,6 @@ const TRANSLATIONS = {
     getWeekly: "Obtenir le Pass Semaine", getMonthly: "Obtenir le Mensuel", maybeLater: "Plus tard",
     greeting: "Konnichiwa! 🌸 Je suis Kokoro, votre guide culturel japonais. Posez-moi toutes vos questions sur le Japon!",
     other: "Plus", capture: "⬤ Capturer", analyze: "🔍 Analyser", retake: "Reprendre",
-    thinking2: "Kokoro lit... 🌸",
     error: "Gomen nasai! Une erreur s'est produite. Veuillez réessayer 🙏",
     sorry: "Désolé, je n'ai pas compris. Veuillez réessayer!",
   },
@@ -460,7 +454,7 @@ export default function App() {
   const [input, setInput] = useState("");
   const [mode, setMode] = useState("quick");
   const [loading, setLoading] = useState(false);
-  const [dailyCount, setDailyCount] = useState(getDailyCount());
+  const [dailyCount, setDailyCount] = useState(() => getDailyCount());
   const [showPaywall, setShowPaywall] = useState(false);
   const [useReal, setUseReal] = useState(false);
   const [openScene, setOpenScene] = useState(null);
@@ -472,7 +466,10 @@ export default function App() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const bottomRef = useRef(null);
-  const kokoroImg = useReal ? "/images/kokoro-real.png" : "/images/kokoro-chibi.png";
+
+  const kokoroImg = loading
+    ? (useReal ? "/images/kokoro-real-thinking.png" : "/images/kokoro-thinking.png")
+    : (useReal ? "/images/kokoro-real.png" : "/images/kokoro-chibi.png");
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -484,6 +481,7 @@ export default function App() {
 
   useEffect(() => {
     setMessages([{ role: "assistant", content: TRANSLATIONS[language].greeting }]);
+    setDailyCount(getDailyCount());
   }, [language]);
 
   useEffect(() => {
@@ -504,104 +502,101 @@ export default function App() {
   }, [showCamera]);
 
   async function sendMessage(text) {
-  const userText = text || input.trim();
-  if (!userText) return;
-
-  const currentCount = getDailyCount();
-  if (mode === "quick" && currentCount >= DAILY_LIMIT) {
-    setShowPaywall(true);
-    return;
+    const userText = text || input.trim();
+    if (!userText) return;
+    const currentCount = getDailyCount();
+    if (mode === "quick" && currentCount >= DAILY_LIMIT) {
+      setShowPaywall(true);
+      return;
+    }
+    const newMessages = [...messages, { role: "user", content: userText }];
+    setMessages(newMessages);
+    setInput("");
+    setLoading(true);
+    const newCount = incrementDailyCount();
+    setDailyCount(newCount);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: newMessages, mode, language }),
+      });
+      const data = await res.json();
+      const reply = data.content?.[0]?.text || t.sorry;
+      setMessages([...newMessages, { role: "assistant", content: reply }]);
+    } catch {
+      setMessages([...newMessages, { role: "assistant", content: t.error }]);
+    } finally {
+      setLoading(false);
+    }
   }
-
-  const newMessages = [...messages, { role: "user", content: userText }];
-  setMessages(newMessages);
-  setInput("");
-  setLoading(true);
-
-  const newCount = incrementDailyCount();
-  setDailyCount(newCount);
-
-  try {
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: newMessages, mode, language }),
-    });
-    const data = await res.json();
-    const reply = data.content?.[0]?.text || t.sorry;
-    setMessages([...newMessages, { role: "assistant", content: reply }]);
-  } catch {
-    setMessages([...newMessages, { role: "assistant", content: t.error }]);
-  } finally {
-    setLoading(false);
-  }
-}
 
   async function sendScene(query) {
-  setOpenScene(null);
-  setOpenOther(null);
-  setShowOtherList(false);
-
-  const currentCount = getDailyCount();
-  if (mode === "quick" && currentCount >= DAILY_LIMIT) {
-    setShowPaywall(true);
-    return;
+    setOpenScene(null);
+    setOpenOther(null);
+    setShowOtherList(false);
+    const currentCount = getDailyCount();
+    if (mode === "quick" && currentCount >= DAILY_LIMIT) {
+      setShowPaywall(true);
+      return;
+    }
+    const newMessages = [...messages, { role: "user", content: query }];
+    setMessages(newMessages);
+    setLoading(true);
+    const newCount = incrementDailyCount();
+    setDailyCount(newCount);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: newMessages, mode, language }),
+      });
+      const data = await res.json();
+      const reply = data.content?.[0]?.text || t.sorry;
+      setMessages([...newMessages, { role: "assistant", content: reply }]);
+    } catch {
+      setMessages([...newMessages, { role: "assistant", content: t.error }]);
+    } finally {
+      setLoading(false);
+    }
   }
-
-  const newMessages = [...messages, { role: "user", content: query }];
-  setMessages(newMessages);
-  setLoading(true);
-
-  const newCount = incrementDailyCount();
-  setDailyCount(newCount);
-
-  try {
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages: newMessages, mode, language }),
-    });
-    const data = await res.json();
-    const reply = data.content?.[0]?.text || t.sorry;
-    setMessages([...newMessages, { role: "assistant", content: reply }]);
-  } catch {
-    setMessages([...newMessages, { role: "assistant", content: t.error }]);
-  } finally {
-    setLoading(false);
-  }
-}
 
   async function analyzeImage() {
-  if (!capturedImg) return;
-  const imgMsg = { role: "user", type: "image", content: capturedImg.dataUrl };
-  const newMessages = [...messages, imgMsg];
-  setMessages(newMessages);
-  setShowCamera(false);
-  setCapturedImg(null);
-  setLoading(true);
-  const newCount = incrementDailyCount();
-  setDailyCount(newCount);
-  try {
-    const res = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        messages: [{ role: "user", content: [
-          { type: "image", source: { type: "base64", media_type: "image/jpeg", data: capturedImg.base64 } },
-          { type: "text", text: "Please translate any Japanese text in this image and explain the cultural context." },
-        ]}],
-        mode: "deep", language,
-      }),
-    });
-    const data = await res.json();
-    const reply = data.content?.[0]?.text || "I couldn't analyze this image.";
-    setMessages([...newMessages, { role: "assistant", content: reply }]);
-  } catch {
-    setMessages([...newMessages, { role: "assistant", content: t.error }]);
-  } finally {
-    setLoading(false);
+    if (!capturedImg) return;
+    const currentCount = getDailyCount();
+    if (mode === "quick" && currentCount >= DAILY_LIMIT) {
+      setShowPaywall(true);
+      return;
+    }
+    const imgMsg = { role: "user", type: "image", content: capturedImg.dataUrl };
+    const newMessages = [...messages, imgMsg];
+    setMessages(newMessages);
+    setShowCamera(false);
+    setCapturedImg(null);
+    setLoading(true);
+    const newCount = incrementDailyCount();
+    setDailyCount(newCount);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: [{ role: "user", content: [
+            { type: "image", source: { type: "base64", media_type: "image/jpeg", data: capturedImg.base64 } },
+            { type: "text", text: "Please translate any Japanese text in this image and explain the cultural context." },
+          ]}],
+          mode: "deep", language,
+        }),
+      });
+      const data = await res.json();
+      const reply = data.content?.[0]?.text || "I couldn't analyze this image.";
+      setMessages([...newMessages, { role: "assistant", content: reply }]);
+    } catch {
+      setMessages([...newMessages, { role: "assistant", content: t.error }]);
+    } finally {
+      setLoading(false);
+    }
   }
-}
 
   function capturePhoto() {
     const canvas = canvasRef.current;
@@ -762,23 +757,23 @@ export default function App() {
       </div>
 
       <div className="usage-bar">
-  <span className="disclaimer">⚠️ AI responses are for reference only. Always verify with local sources.</span>
-</div>
+        <span className="disclaimer">⚠️ AI responses are for reference only. Always verify with local sources.</span>
+      </div>
 
       <div className="input-area">
-  {mode === "quick" && (
-    <div className="count-badge">{DAILY_LIMIT - dailyCount}/{DAILY_LIMIT}</div>
-  )}
-  <input
-    className="input"
-    value={input}
-    onChange={(e) => setInput(e.target.value)}
-    onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-    placeholder={t.placeholder}
-  />
-  <button className="cam-inline-btn" onClick={() => setShowCamera(!showCamera)}>📷</button>
-  <button className="send-btn" onClick={() => sendMessage()}>{t.send}</button>
-</div>
+        {mode === "quick" && (
+          <div className="count-badge">{DAILY_LIMIT - dailyCount}/{DAILY_LIMIT}</div>
+        )}
+        <input
+          className="input"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+          placeholder={t.placeholder}
+        />
+        <button className="cam-inline-btn" onClick={() => setShowCamera(!showCamera)}>📷</button>
+        <button className="send-btn" onClick={() => sendMessage()}>{t.send}</button>
+      </div>
 
       {showPaywall && (
         <div className="modal-overlay" onClick={() => setShowPaywall(false)}>
