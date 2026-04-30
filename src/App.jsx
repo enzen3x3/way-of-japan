@@ -463,13 +463,16 @@ export default function App() {
   const [showCamera, setShowCamera] = useState(false);
   const [cameraStream, setCameraStream] = useState(null);
   const [capturedImg, setCapturedImg] = useState(null);
+  const [thinkingFrame, setThinkingFrame] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const bottomRef = useRef(null);
 
   const kokoroImg = loading
-    ? (useReal ? "/images/kokoro-real-thinking.png" : "/images/kokoro-thinking.png")
-    : (useReal ? "/images/kokoro-real.png" : "/images/kokoro-chibi.png");
+  ? (thinkingFrame
+      ? (useReal ? "/images/kokoro-real-thinking.png" : "/images/kokoro-thinking.png")
+      : (useReal ? "/images/kokoro-real.png" : "/images/kokoro-chibi.png"))
+  : (useReal ? "/images/kokoro-real.png" : "/images/kokoro-chibi.png");
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -500,6 +503,18 @@ export default function App() {
       setCapturedImg(null);
     }
   }, [showCamera]);
+
+  useEffect(() => {
+  let interval;
+  if (loading) {
+    interval = setInterval(() => {
+      setThinkingFrame(prev => !prev);
+    }, 600);
+  } else {
+    setThinkingFrame(false);
+  }
+  return () => clearInterval(interval);
+}, [loading]);
 
   async function sendMessage(text) {
     const userText = text || input.trim();
@@ -638,6 +653,14 @@ export default function App() {
           <option value="th">🇹🇭 TH</option>
           <option value="fr">🇫🇷 FR</option>
         </select>
+         {import.meta.env.DEV && (
+          <button
+            onClick={() => { localStorage.clear(); setDailyCount(0); }}
+            style={{ fontSize: '10px', padding: '2px 6px', background: '#ff6b6b', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+          >
+            DEV Reset
+          </button>
+        )}
       </header>
 
       <div className="mode-toggle">
