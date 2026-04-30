@@ -164,6 +164,17 @@ body {
   border-color: var(--pink);
 }
 
+.scene-btn-vertical.active {
+  background: var(--pink);
+  color: var(--white);
+  border-color: var(--pink-dark);
+}
+
+.scene-btn-vertical:hover {
+  background: var(--pink-light);
+  border-color: var(--pink);
+}
+
 .scene-btn-emoji {
   font-size: 20px;
 }
@@ -220,6 +231,59 @@ body {
 
 .chat-area > .message-row:first-child {
   margin-top: auto;
+}
+
+.right-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.accordion {
+  background: var(--white);
+  border-bottom: 1px solid var(--beige-dark);
+  padding: 10px 12px;
+  flex-shrink: 0;
+}
+
+.accordion-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pink-dark);
+  margin-bottom: 8px;
+}
+
+.accordion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.accordion-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 8px 4px;
+  border: 1.5px solid var(--beige-dark);
+  border-radius: 10px;
+  background: var(--beige);
+  color: var(--text);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.accordion-btn:hover {
+  background: var(--pink-light);
+  border-color: var(--pink);
+}
+
+.accordion-btn span:first-child {
+  font-size: 20px;
 }
 
 .message-row {
