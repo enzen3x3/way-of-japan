@@ -131,6 +131,7 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .left-col::-webkit-scrollbar {
@@ -218,10 +219,11 @@ body {
 
 .kokoro-img {
   width: 76px;
-  height: 100px;
+  height: 110px;
   object-fit: contain;
   object-position: top;
   filter: drop-shadow(0 4px 12px rgba(232,164,184,0.4));
+  flex-shrink: 0;
 }
 
 .kokoro-toggle {

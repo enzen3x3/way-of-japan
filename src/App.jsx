@@ -1013,13 +1013,6 @@ export default function App() {
           </div>
         </>
       ) : (
-        <CameraScreen
-          language={language}
-          t={t}
-          setScreen={setScreen}
-          setMessages={setMessages}
-          messages={messages}
-        />
       )}
 
       {showPaywall && (
