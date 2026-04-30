@@ -563,34 +563,36 @@ export default function App() {
 }
 
   async function analyzeImage() {
-    if (!capturedImg) return;
-    const imgMsg = { role: "user", type: "image", content: capturedImg.dataUrl };
-    const newMessages = [...messages, imgMsg];
-    setMessages(newMessages);
-    setShowCamera(false);
-    setCapturedImg(null);
-    setLoading(true);
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: [{ role: "user", content: [
-            { type: "image", source: { type: "base64", media_type: "image/jpeg", data: capturedImg.base64 } },
-            { type: "text", text: "Please translate any Japanese text in this image and explain the cultural context." },
-          ]}],
-          mode: "deep", language,
-        }),
-      });
-      const data = await res.json();
-      const reply = data.content?.[0]?.text || "I couldn't analyze this image.";
-      setMessages([...newMessages, { role: "assistant", content: reply }]);
-    } catch {
-      setMessages([...newMessages, { role: "assistant", content: t.error }]);
-    } finally {
-      setLoading(false);
-    }
+  if (!capturedImg) return;
+  const imgMsg = { role: "user", type: "image", content: capturedImg.dataUrl };
+  const newMessages = [...messages, imgMsg];
+  setMessages(newMessages);
+  setShowCamera(false);
+  setCapturedImg(null);
+  setLoading(true);
+  const newCount = incrementDailyCount();
+  setDailyCount(newCount);
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        messages: [{ role: "user", content: [
+          { type: "image", source: { type: "base64", media_type: "image/jpeg", data: capturedImg.base64 } },
+          { type: "text", text: "Please translate any Japanese text in this image and explain the cultural context." },
+        ]}],
+        mode: "deep", language,
+      }),
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || "I couldn't analyze this image.";
+    setMessages([...newMessages, { role: "assistant", content: reply }]);
+  } catch {
+    setMessages([...newMessages, { role: "assistant", content: t.error }]);
+  } finally {
+    setLoading(false);
   }
+}
 
   function capturePhoto() {
     const canvas = canvasRef.current;
@@ -750,9 +752,12 @@ export default function App() {
         </div>
       </div>
 
-      {mode === "quick" && (
-        <div className="usage-bar">{t.freeLeft(DAILY_LIMIT - dailyCount, DAILY_LIMIT)}</div>
-      )}
+      <div className="usage-bar">
+  {mode === "quick" && (
+    <span>{t.freeLeft(DAILY_LIMIT - dailyCount, DAILY_LIMIT)}</span>
+  )}
+  <span className="disclaimer">⚠️ AI responses are for reference only. Always verify with local sources.</span>
+</div>
 
       <div className="input-area">
         <input
