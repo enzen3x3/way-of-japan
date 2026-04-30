@@ -35,6 +35,11 @@ body {
   background: var(--white);
   box-shadow: 0 0 40px rgba(0,0,0,0.1);
   overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
 }
 
 /* Header */
@@ -45,6 +50,7 @@ body {
   align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid var(--pink-light);
+  flex-shrink: 0;
 }
 
 .header-left {
