@@ -502,53 +502,63 @@ export default function App() {
   }, [showCamera]);
 
   async function sendMessage(text) {
-    const userText = text || input.trim();
-    if (!userText) return;
-    if (mode === "quick" && dailyCount >= DAILY_LIMIT) { setShowPaywall(true); return; }
-    const newMessages = [...messages, { role: "user", content: userText }];
-    setMessages(newMessages);
-    setInput("");
-    setLoading(true);
-    incrementDailyCount();
-    setDailyCount(getDailyCount());
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: newMessages, mode, language }),
-      });
-      const data = await res.json();
-      const reply = data.content?.[0]?.text || t.sorry;
-      setMessages([...newMessages, { role: "assistant", content: reply }]);
-    } catch {
-      setMessages([...newMessages, { role: "assistant", content: t.error }]);
-    } finally {
-      setLoading(false);
-    }
+  const userText = text || input.trim();
+  if (!userText) return;
+
+  const currentCount = getDailyCount();
+  if (mode === "quick" && currentCount >= DAILY_LIMIT) {
+    setShowPaywall(true);
+    return;
   }
 
-  async function sendScene(query) {
-    setOpenScene(null);
-    setOpenOther(null);
-    setShowOtherList(false);
-    const newMessages = [...messages, { role: "user", content: query }];
-    setMessages(newMessages);
-    setLoading(true);
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: newMessages, mode, language }),
-      });
-      const data = await res.json();
-      const reply = data.content?.[0]?.text || t.sorry;
-      setMessages([...newMessages, { role: "assistant", content: reply }]);
-    } catch {
-      setMessages([...newMessages, { role: "assistant", content: t.error }]);
-    } finally {
-      setLoading(false);
-    }
+  const newMessages = [...messages, { role: "user", content: userText }];
+  setMessages(newMessages);
+  setInput("");
+  setLoading(true);
+
+  const newCount = incrementDailyCount();
+  setDailyCount(newCount);
+
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: newMessages, mode, language }),
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || t.sorry;
+    setMessages([...newMessages, { role: "assistant", content: reply }]);
+  } catch {
+    setMessages([...newMessages, { role: "assistant", content: t.error }]);
+  } finally {
+    setLoading(false);
   }
+}
+
+  async function sendScene(query) {
+  setOpenScene(null);
+  setOpenOther(null);
+  setShowOtherList(false);
+  const newMessages = [...messages, { role: "user", content: query }];
+  setMessages(newMessages);
+  setLoading(true);
+  incrementDailyCount();
+  setDailyCount(getDailyCount());
+  try {
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: newMessages, mode, language }),
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || t.sorry;
+    setMessages([...newMessages, { role: "assistant", content: reply }]);
+  } catch {
+    setMessages([...newMessages, { role: "assistant", content: t.error }]);
+  } finally {
+    setLoading(false);
+  }
+}
 
   async function analyzeImage() {
     if (!capturedImg) return;
