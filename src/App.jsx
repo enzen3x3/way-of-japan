@@ -2,6 +2,9 @@ import { useState, useRef, useEffect } from "react";
 import "./App.css";
 
 const SCENE_DATA = {
+  "zh-tw": [],
+  th: [],
+  fr: [],
   en: [
     {
       emoji: "🍜", label: "Dining",
@@ -206,6 +209,9 @@ const SCENE_DATA = {
 };
 
 const OTHER_SCENES = {
+  "zh-tw": [],
+  th: [],
+  fr: [],
   en: [
     {
       emoji: "🚕", label: "Taxi",
@@ -566,6 +572,108 @@ const TRANSLATIONS = {
     error: "죄송합니다! 문제가 발생했습니다. 다시 시도해주세요 🙏",
     sorry: "죄송합니다, 이해하지 못했습니다. 다시 시도해주세요!",
   },
+  "zh-tw": {
+    title: "日本之道",
+    subtitle: "您的文化嚮導 🌸",
+    quick: "🌸 快速",
+    deep: "🍵 深度",
+    translate: "📷 翻譯",
+    placeholder: "向Kokoro詢問任何關於日本的問題...",
+    send: "發送",
+    thinking: "Kokoro正在思考... 🌸",
+    freeLeft: (n, t) => `免費：今天還剩 ${n} / ${t} 則訊息`,
+    limitTitle: "已達到每日限制！🌸",
+    limitDesc: "您今天的5則免費訊息已用完。",
+    weeklyPass: "週票",
+    weeklyPrice: "$3.99",
+    weeklyDesc: "7天無限使用",
+    monthly: "月票",
+    monthlyPrice: "$4.99",
+    monthlyDesc: "無限使用 + 深度模式",
+    getWeekly: "購買週票",
+    getMonthly: "購買月票",
+    maybeLater: "稍後再說",
+    greeting: "你好！🌸 我是Kokoro，您的日本文化嚮導。隨時向我詢問關於日本的任何問題！",
+    other: "更多",
+    cameraTitle: "📷 相機翻譯",
+    cameraDesc: "對準日文文字進行翻譯並了解文化含義",
+    startCamera: "📷 啟動相機",
+    capture: "⬤ 拍照",
+    analyze: "🔍 分析",
+    retake: "重拍",
+    analyzing: "Kokoro正在閱讀... 🌸",
+    backToChat: "← 返回聊天",
+    error: "對不起！出了點問題，請再試一次 🙏",
+    sorry: "抱歉，我沒能理解。請再試一次！",
+  },
+  th: {
+    title: "วิถีญี่ปุ่น",
+    subtitle: "ไกด์วัฒนธรรมของคุณ 🌸",
+    quick: "🌸 เร็ว",
+    deep: "🍵 ลึก",
+    translate: "📷 แปล",
+    placeholder: "ถาม Kokoro เกี่ยวกับญี่ปุ่น...",
+    send: "ส่ง",
+    thinking: "Kokoro กำลังคิด... 🌸",
+    freeLeft: (n, t) => `ฟรี: เหลือ ${n} / ${t} ข้อความวันนี้`,
+    limitTitle: "ถึงขีดจำกัดรายวัน! 🌸",
+    limitDesc: "คุณใช้ข้อความฟรี 5 ข้อความในวันนี้หมดแล้ว",
+    weeklyPass: "พาสรายสัปดาห์",
+    weeklyPrice: "$3.99",
+    weeklyDesc: "ไม่จำกัด 7 วัน",
+    monthly: "รายเดือน",
+    monthlyPrice: "$4.99",
+    monthlyDesc: "ไม่จำกัด + โหมดลึก",
+    getWeekly: "ซื้อพาสรายสัปดาห์",
+    getMonthly: "ซื้อรายเดือน",
+    maybeLater: "ไว้ทีหลัง",
+    greeting: "สวัสดี! 🌸 ฉันคือ Kokoro ไกด์วัฒนธรรมญี่ปุ่นของคุณ ถามฉันได้ทุกเรื่องเกี่ยวกับญี่ปุ่น!",
+    other: "เพิ่มเติม",
+    cameraTitle: "📷 แปลด้วยกล้อง",
+    cameraDesc: "ชี้กล้องไปที่ข้อความภาษาญี่ปุ่นเพื่อแปลและเรียนรู้ความหมายทางวัฒนธรรม",
+    startCamera: "📷 เปิดกล้อง",
+    capture: "⬤ ถ่ายภาพ",
+    analyze: "🔍 วิเคราะห์",
+    retake: "ถ่ายใหม่",
+    analyzing: "Kokoro กำลังอ่าน... 🌸",
+    backToChat: "← กลับไปแชท",
+    error: "ขอโทษ! เกิดข้อผิดพลาด กรุณาลองใหม่ 🙏",
+    sorry: "ขอโทษ ฉันไม่เข้าใจ กรุณาลองใหม่!",
+  },
+  fr: {
+    title: "Voie du Japon",
+    subtitle: "Votre Guide Culturel 🌸",
+    quick: "🌸 Rapide",
+    deep: "🍵 Approfondi",
+    translate: "📷 Traduire",
+    placeholder: "Demandez à Kokoro tout sur le Japon...",
+    send: "Envoyer",
+    thinking: "Kokoro réfléchit... 🌸",
+    freeLeft: (n, t) => `Gratuit: ${n} / ${t} messages restants aujourd'hui`,
+    limitTitle: "Limite quotidienne atteinte! 🌸",
+    limitDesc: "Vous avez utilisé vos 5 messages gratuits aujourd'hui.",
+    weeklyPass: "Pass Semaine",
+    weeklyPrice: "$3.99",
+    weeklyDesc: "Illimité pendant 7 jours",
+    monthly: "Mensuel",
+    monthlyPrice: "$4.99",
+    monthlyDesc: "Illimité + Mode approfondi",
+    getWeekly: "Obtenir le Pass Semaine",
+    getMonthly: "Obtenir le Mensuel",
+    maybeLater: "Plus tard",
+    greeting: "Konnichiwa! 🌸 Je suis Kokoro, votre guide culturel japonais. Posez-moi toutes vos questions sur le Japon!",
+    other: "Plus",
+    cameraTitle: "📷 Traduction Caméra",
+    cameraDesc: "Pointez vers du texte japonais pour traduire et apprendre le contexte culturel",
+    startCamera: "📷 Démarrer la Caméra",
+    capture: "⬤ Capturer",
+    analyze: "🔍 Analyser",
+    retake: "Reprendre",
+    analyzing: "Kokoro lit... 🌸",
+    backToChat: "← Retour au Chat",
+    error: "Gomen nasai! Une erreur s'est produite. Veuillez réessayer 🙏",
+    sorry: "Désolé, je n'ai pas compris. Veuillez réessayer!",
+  },
 };
 
 const DAILY_LIMIT = 5;
@@ -700,14 +808,16 @@ export default function App() {
         <select className="lang-select" value={language} onChange={(e) => setLanguage(e.target.value)}>
           <option value="en">🇺🇸 EN</option>
           <option value="zh">🇨🇳 ZH</option>
+          <option value="zh-tw">🇹🇼 TW</option>
           <option value="ko">🇰🇷 KO</option>
+          <option value="th">🇹🇭 TH</option>
+          <option value="fr">🇫🇷 FR</option>
         </select>
       </header>
 
       <div className="mode-toggle">
         <button className={`mode-btn ${mode === "quick" ? "active" : ""}`} onClick={() => setMode("quick")}>{t.quick}</button>
         <button className={`mode-btn ${mode === "deep" ? "active" : ""}`} onClick={() => setMode("deep")}>{t.deep}</button>
-        <button className={`mode-btn ${screen === "camera" ? "active" : ""}`} onClick={() => setScreen(screen === "camera" ? "chat" : "camera")}>{t.translate}</button>
       </div>
 
       {screen === "chat" ? (
