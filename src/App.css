@@ -397,12 +397,21 @@ body {
 
 /* Usage Bar */
 .usage-bar {
-  text-align: center;
-  font-size: 11px;
-  color: var(--text-light);
-  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 12px;
   background: var(--beige);
   border-top: 1px solid var(--beige-dark);
+  flex-shrink: 0;
+}
+
+.disclaimer {
+  font-size: 9px;
+  color: var(--text-light);
+  text-align: center;
+  opacity: 0.8;
 }
 
 /* Input Area */
