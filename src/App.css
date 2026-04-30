@@ -89,6 +89,8 @@ body {
   padding: 10px 12px;
   background: var(--beige);
   border-bottom: 1px solid var(--beige-dark);
+  flex-shrink: 0;
+  z-index: 10;
 }
 
 .mode-btn {
@@ -252,7 +254,7 @@ body {
   flex-direction: column;
   gap: 10px;
   background: var(--beige);
-  font-size: 15px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .chat-area > .message-row:first-child {
