@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import "./App.css";
+import LegalPage from "./LegalPage";
 
 const SCENE_DATA = {
   en: [
@@ -781,6 +782,7 @@ export default function App() {
   const [cameraStream, setCameraStream] = useState(null);
   const [capturedImg, setCapturedImg] = useState(null);
   const [thinkingFrame, setThinkingFrame] = useState(false);
+  const [showLegal, setShowLegal] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const bottomRef = useRef(null);
@@ -1101,8 +1103,13 @@ export default function App() {
       </div>
 
       <div className="usage-bar">
-        <span className="disclaimer">⚠️ AI responses are for reference only. Always verify with local sources.</span>
-      </div>
+  <span className="disclaimer">⚠️ AI responses are for reference only.</span>
+  <div className="legal-footer">
+    <button className="legal-link" onClick={() => setShowLegal(true)}>Privacy Policy</button>
+    <button className="legal-link" onClick={() => setShowLegal(true)}>Terms of Service</button>
+    <button className="legal-link" onClick={() => setShowLegal(true)}>特定商取引法</button>
+  </div>
+</div>
 
       <div className="input-area">
         {mode === "quick" && (
@@ -1143,6 +1150,7 @@ export default function App() {
           </div>
         </div>
       )}
+      {showLegal && <LegalPage onClose={() => setShowLegal(false)} />}
     </div>
   );
 }
