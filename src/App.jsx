@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import "./App.css";
 
 const SCENE_DATA = {
-  "zh-tw": [], th: [], fr: [],
   en: [
     { emoji: "🍜", label: "Dining", sub: [
       { emoji: "🍣", label: "Sushi", query: "What are the etiquette rules for eating sushi in Japan?" },
@@ -83,6 +82,46 @@ const SCENE_DATA = {
       { emoji: "🚨", label: "灾害", query: "在日本遇到地震或灾害时该怎么办？" },
     ]},
   ],
+  "zh-tw": [
+    { emoji: "🍜", label: "餐飲", sub: [
+      { emoji: "🍣", label: "壽司", query: "在日本吃壽司有哪些禮儀？" },
+      { emoji: "🍜", label: "拉麵", query: "在日本如何正確吃拉麵？" },
+      { emoji: "🥩", label: "燒肉", query: "如何正確享用日式燒肉？" },
+      { emoji: "🍤", label: "天婦羅", query: "在日本如何正確吃天婦羅？" },
+      { emoji: "🐟", label: "鰻魚", query: "在日本如何正確吃鰻魚飯？" },
+      { emoji: "🍱", label: "壽喜鍋", query: "如何正確享用日式壽喜鍋？" },
+      { emoji: "🍶", label: "居酒屋", query: "在日本居酒屋有哪些規則和禮儀？" },
+    ]},
+    { emoji: "🚃", label: "電車", sub: [
+      { emoji: "🎫", label: "買票", query: "如何在日本購買電車票？" },
+      { emoji: "🚃", label: "禮儀", query: "日本電車上有哪些禮儀？" },
+      { emoji: "🗺️", label: "路線圖", query: "如何看懂日本電車路線圖？" },
+    ]},
+    { emoji: "♨️", label: "溫泉", sub: [
+      { emoji: "🛁", label: "使用方法", query: "如何正確使用日本溫泉？" },
+      { emoji: "🔱", label: "刺青", query: "有刺青能進日本溫泉嗎？" },
+      { emoji: "👫", label: "混浴", query: "關於日本混浴溫泉需要了解什麼？" },
+      { emoji: "🏨", label: "旅館", query: "在日本旅館住宿有哪些禮儀？" },
+    ]},
+    { emoji: "🏯", label: "觀光", sub: [
+      { emoji: "⛩️", label: "神社", query: "如何正確參拜日本神社？" },
+      { emoji: "🛕", label: "寺廟", query: "如何正確參觀日本寺廟？" },
+      { emoji: "🏯", label: "城堡", query: "參觀日本城堡需要注意什麼？" },
+      { emoji: "🌿", label: "庭園", query: "在日本庭園有哪些禮儀？" },
+    ]},
+    { emoji: "🛍️", label: "購物", sub: [
+      { emoji: "🧾", label: "免稅", query: "外國遊客如何在日本享受免稅購物？" },
+      { emoji: "💴", label: "百元店", query: "關於日本百元店需要了解什麼？" },
+      { emoji: "🏪", label: "便利店", query: "如何使用日本便利店？" },
+      { emoji: "🏬", label: "百貨店", query: "在日本百貨店有哪些禮儀？" },
+    ]},
+    { emoji: "🏥", label: "緊急情況", sub: [
+      { emoji: "🏥", label: "醫院", query: "外國人如何在日本使用醫院？" },
+      { emoji: "👮", label: "警察", query: "在日本如何聯繫警察？" },
+      { emoji: "👜", label: "失物", query: "在日本丟失物品怎麼辦？" },
+      { emoji: "🚨", label: "災害", query: "在日本遇到地震或災害時該怎麼辦？" },
+    ]},
+  ],
   ko: [
     { emoji: "🍜", label: "식사", sub: [
       { emoji: "🍣", label: "스시", query: "일본에서 스시를 먹을 때 예절은?" },
@@ -123,10 +162,89 @@ const SCENE_DATA = {
       { emoji: "🚨", label: "재해", query: "일본에서 지진이나 재해가 발생했을 때는?" },
     ]},
   ],
+  th: [
+    { emoji: "🍜", label: "อาหาร", sub: [
+      { emoji: "🍣", label: "ซูชิ", query: "มารยาทในการกินซูชิในญี่ปุ่นคืออะไร?" },
+      { emoji: "🍜", label: "ราเมน", query: "วิธีกินราเมนอย่างถูกต้องในญี่ปุ่น?" },
+      { emoji: "🥩", label: "ยากินิกุ", query: "วิธีกินยากินิกุอย่างถูกต้อง?" },
+      { emoji: "🍤", label: "เทมปุระ", query: "วิธีกินเทมปุระอย่างถูกต้องในญี่ปุ่น?" },
+      { emoji: "🐟", label: "ปลาไหล", query: "วิธีกินข้าวหน้าปลาไหลอย่างถูกต้องในญี่ปุ่น?" },
+      { emoji: "🍱", label: "สุกียากี้", query: "วิธีกินสุกียากี้อย่างถูกต้อง?" },
+      { emoji: "🍶", label: "อิซากายะ", query: "กฎและมารยาทที่ร้านอิซากายะในญี่ปุ่นคืออะไร?" },
+    ]},
+    { emoji: "🚃", label: "รถไฟ", sub: [
+      { emoji: "🎫", label: "ตั๋ว", query: "วิธีซื้อตั๋วรถไฟในญี่ปุ่น?" },
+      { emoji: "🚃", label: "มารยาท", query: "มารยาทบนรถไฟญี่ปุ่นคืออะไร?" },
+      { emoji: "🗺️", label: "แผนที่", query: "วิธีอ่านแผนที่เส้นทางรถไฟญี่ปุ่น?" },
+    ]},
+    { emoji: "♨️", label: "ออนเซ็น", sub: [
+      { emoji: "🛁", label: "วิธีใช้", query: "วิธีใช้ออนเซ็นญี่ปุ่นอย่างถูกต้อง?" },
+      { emoji: "🔱", label: "รอยสัก", query: "กฎเกี่ยวกับรอยสักที่ออนเซ็นญี่ปุ่น?" },
+      { emoji: "👫", label: "อาบรวม", query: "ควรรู้อะไรเกี่ยวกับออนเซ็นอาบรวมในญี่ปุ่น?" },
+      { emoji: "🏨", label: "เรียวกัง", query: "มารยาทที่เรียวกังญี่ปุ่นคืออะไร?" },
+    ]},
+    { emoji: "🏯", label: "ท่องเที่ยว", sub: [
+      { emoji: "⛩️", label: "ศาลเจ้า", query: "วิธีเยี่ยมชมศาลเจ้าญี่ปุ่นอย่างถูกต้อง?" },
+      { emoji: "🛕", label: "วัด", query: "วิธีเยี่ยมชมวัดญี่ปุ่นอย่างถูกต้อง?" },
+      { emoji: "🏯", label: "ปราสาท", query: "ควรรู้อะไรเมื่อเยี่ยมชมปราสาทญี่ปุ่น?" },
+      { emoji: "🌿", label: "สวน", query: "มารยาทในสวนญี่ปุ่นคืออะไร?" },
+    ]},
+    { emoji: "🛍️", label: "ช้อปปิ้ง", sub: [
+      { emoji: "🧾", label: "ปลอดภาษี", query: "นักท่องเที่ยวช้อปปิ้งปลอดภาษีในญี่ปุ่นอย่างไร?" },
+      { emoji: "💴", label: "ร้าน 100 เยน", query: "ควรรู้อะไรเกี่ยวกับร้าน 100 เยนในญี่ปุ่น?" },
+      { emoji: "🏪", label: "ร้านสะดวกซื้อ", query: "วิธีใช้ร้านสะดวกซื้อญี่ปุ่น?" },
+      { emoji: "🏬", label: "ห้างสรรพสินค้า", query: "มารยาทที่ห้างสรรพสินค้าญี่ปุ่นคืออะไร?" },
+    ]},
+    { emoji: "🏥", label: "ฉุกเฉิน", sub: [
+      { emoji: "🏥", label: "โรงพยาบาล", query: "ชาวต่างชาติใช้โรงพยาบาลในญี่ปุ่นอย่างไร?" },
+      { emoji: "👮", label: "ตำรวจ", query: "ติดต่อตำรวจในญี่ปุ่นอย่างไร?" },
+      { emoji: "👜", label: "ของหาย", query: "ทำอย่างไรเมื่อทำของหายในญี่ปุ่น?" },
+      { emoji: "🚨", label: "ภัยพิบัติ", query: "ทำอย่างไรเมื่อเกิดแผ่นดินไหวในญี่ปุ่น?" },
+    ]},
+  ],
+  fr: [
+    { emoji: "🍜", label: "Restauration", sub: [
+      { emoji: "🍣", label: "Sushi", query: "Quelles sont les règles d'étiquette pour manger des sushis au Japon?" },
+      { emoji: "🍜", label: "Ramen", query: "Comment manger correctement des ramen au Japon?" },
+      { emoji: "🥩", label: "Yakiniku", query: "Comment profiter correctement du yakiniku japonais?" },
+      { emoji: "🍤", label: "Tempura", query: "Comment manger correctement la tempura au Japon?" },
+      { emoji: "🐟", label: "Unagi", query: "Comment manger correctement l'unagi au Japon?" },
+      { emoji: "🍱", label: "Sukiyaki", query: "Comment profiter correctement du sukiyaki au Japon?" },
+      { emoji: "🍶", label: "Izakaya", query: "Quelles sont les règles dans un izakaya japonais?" },
+    ]},
+    { emoji: "🚃", label: "Train", sub: [
+      { emoji: "🎫", label: "Billets", query: "Comment acheter des billets de train au Japon?" },
+      { emoji: "🚃", label: "Étiquette", query: "Quelles sont les règles dans les trains japonais?" },
+      { emoji: "🗺️", label: "Itinéraires", query: "Comment lire un plan de métro japonais?" },
+    ]},
+    { emoji: "♨️", label: "Onsen", sub: [
+      { emoji: "🛁", label: "Utilisation", query: "Comment utiliser correctement un onsen japonais?" },
+      { emoji: "🔱", label: "Tatouages", query: "Quelles sont les règles sur les tatouages dans les onsens?" },
+      { emoji: "👫", label: "Mixte", query: "Que savoir sur les bains mixtes au Japon?" },
+      { emoji: "🏨", label: "Ryokan", query: "Quelles sont les règles d'étiquette dans un ryokan?" },
+    ]},
+    { emoji: "🏯", label: "Tourisme", sub: [
+      { emoji: "⛩️", label: "Sanctuaire", query: "Comment visiter correctement un sanctuaire japonais?" },
+      { emoji: "🛕", label: "Temple", query: "Comment visiter correctement un temple japonais?" },
+      { emoji: "🏯", label: "Château", query: "Que savoir lors de la visite d'un château japonais?" },
+      { emoji: "🌿", label: "Jardin", query: "Quelles sont les règles dans les jardins japonais?" },
+    ]},
+    { emoji: "🛍️", label: "Shopping", sub: [
+      { emoji: "🧾", label: "Détaxe", query: "Comment faire du shopping détaxé au Japon?" },
+      { emoji: "💴", label: "100¥ Shop", query: "Que savoir sur les magasins à 100 yens?" },
+      { emoji: "🏪", label: "Konbini", query: "Comment utiliser un konbini japonais?" },
+      { emoji: "🏬", label: "Grand magasin", query: "Quelles sont les règles dans les grands magasins japonais?" },
+    ]},
+    { emoji: "🏥", label: "Urgences", sub: [
+      { emoji: "🏥", label: "Hôpital", query: "Comment utiliser un hôpital au Japon en tant qu'étranger?" },
+      { emoji: "👮", label: "Police", query: "Comment contacter la police au Japon?" },
+      { emoji: "👜", label: "Objets perdus", query: "Que faire si je perds quelque chose au Japon?" },
+      { emoji: "🚨", label: "Catastrophe", query: "Que faire en cas de tremblement de terre au Japon?" },
+    ]},
+  ],
 };
 
 const OTHER_SCENES = {
-  "zh-tw": [], th: [], fr: [],
   en: [
     { emoji: "🎭", label: "Tradition", sub: [
       { emoji: "🍵", label: "Tea Ceremony", query: "How do I participate in a Japanese tea ceremony?" },
@@ -255,6 +373,70 @@ const OTHER_SCENES = {
       { emoji: "🍜", label: "福冈", query: "去福冈旅游需要了解哪些重要信息？" },
     ]},
   ],
+  "zh-tw": [
+    { emoji: "🎭", label: "傳統體驗", sub: [
+      { emoji: "🍵", label: "茶道", query: "如何參加日本茶道體驗？" },
+      { emoji: "👘", label: "和服", query: "穿和服時有哪些注意事項？" },
+      { emoji: "🧘", label: "坐禪", query: "關於日本坐禪冥想需要了解什麼？" },
+      { emoji: "✍️", label: "書道", query: "關於日本書法體驗需要了解什麼？" },
+    ]},
+    { emoji: "🚕", label: "計程車", sub: [
+      { emoji: "🚕", label: "使用方法", query: "如何在日本使用計程車？" },
+      { emoji: "💴", label: "費用", query: "日本計程車費用是多少？" },
+      { emoji: "📱", label: "叫車軟體", query: "在日本可以使用哪些叫車軟體？" },
+      { emoji: "🤝", label: "小費", query: "在日本需要給計程車司機小費嗎？" },
+    ]},
+    { emoji: "🏧", label: "金錢", sub: [
+      { emoji: "🏧", label: "ATM", query: "外國人如何在日本使用ATM？" },
+      { emoji: "💱", label: "換匯", query: "在日本哪裡可以換錢？" },
+      { emoji: "💳", label: "信用卡", query: "在日本可以使用信用卡嗎？" },
+      { emoji: "💴", label: "現金", query: "在日本需要攜帶多少現金？" },
+    ]},
+    { emoji: "🚽", label: "廁所", sub: [
+      { emoji: "🚿", label: "免治馬桶", query: "如何使用日本免治馬桶？" },
+      { emoji: "🗺️", label: "找廁所", query: "如何在日本找到公共廁所？" },
+      { emoji: "🧻", label: "禮儀", query: "日本的廁所禮儀是什麼？" },
+    ]},
+    { emoji: "📶", label: "網路", sub: [
+      { emoji: "📱", label: "SIM卡", query: "如何在日本購買SIM卡？" },
+      { emoji: "📶", label: "隨身WiFi", query: "如何在日本租用隨身WiFi？" },
+      { emoji: "🆓", label: "免費WiFi", query: "在日本哪裡可以找到免費WiFi？" },
+    ]},
+    { emoji: "🏠", label: "住宿", sub: [
+      { emoji: "🏯", label: "旅館", query: "在日本旅館住宿有哪些禮儀？" },
+      { emoji: "🏨", label: "飯店", query: "在日本飯店住宿需要了解什麼？" },
+      { emoji: "🏠", label: "民宿", query: "在日本使用Airbnb需要了解什麼？" },
+      { emoji: "💤", label: "膠囊旅館", query: "如何使用日本膠囊旅館？" },
+    ]},
+    { emoji: "🗣️", label: "語言", sub: [
+      { emoji: "👋", label: "基本用語", query: "遊客最常用的日語短句有哪些？" },
+      { emoji: "🆘", label: "求助", query: "如何用日語尋求幫助？" },
+      { emoji: "📱", label: "翻譯軟體", query: "在日本哪些翻譯軟體最好用？" },
+    ]},
+    { emoji: "🎌", label: "祭典", sub: [
+      { emoji: "🎆", label: "煙火大會", query: "關於日本煙火大會需要了解什麼？" },
+      { emoji: "🏮", label: "攤位", query: "如何享用日本祭典攤位？" },
+      { emoji: "💃", label: "盂蘭盆舞", query: "什麼是盂蘭盆舞？如何參加？" },
+      { emoji: "⛩️", label: "新年", query: "關於日本新年慶典需要了解什麼？" },
+    ]},
+    { emoji: "🌸", label: "季節", sub: [
+      { emoji: "🌸", label: "春天", query: "春天去日本旅遊需要了解什麼？" },
+      { emoji: "🌊", label: "夏天", query: "夏天去日本旅遊需要了解什麼？" },
+      { emoji: "🍁", label: "秋天", query: "秋天去日本旅遊需要了解什麼？" },
+      { emoji: "❄️", label: "冬天", query: "冬天去日本旅遊需要了解什麼？" },
+    ]},
+    { emoji: "🗾", label: "地區", sub: [
+      { emoji: "🗼", label: "東京", query: "去東京旅遊需要了解哪些重要資訊？" },
+      { emoji: "⛩️", label: "京都", query: "去京都旅遊需要了解哪些重要資訊？" },
+      { emoji: "🦌", label: "大阪", query: "去大阪旅遊需要了解哪些重要資訊？" },
+      { emoji: "🕊️", label: "廣島", query: "去廣島旅遊需要了解哪些重要資訊？" },
+      { emoji: "🗻", label: "富士山", query: "去富士山需要了解什麼？" },
+      { emoji: "❄️", label: "北海道", query: "去北海道旅遊需要了解哪些重要資訊？" },
+      { emoji: "🦌", label: "奈良", query: "去奈良旅遊需要了解哪些重要資訊？" },
+      { emoji: "🌊", label: "沖繩", query: "去沖繩旅遊需要了解哪些重要資訊？" },
+      { emoji: "🍜", label: "福岡", query: "去福岡旅遊需要了解哪些重要資訊？" },
+    ]},
+  ],
   ko: [
     { emoji: "🎭", label: "전통체험", sub: [
       { emoji: "🍵", label: "다도", query: "일본 다도 체험에 참가하는 방법은?" },
@@ -319,6 +501,134 @@ const OTHER_SCENES = {
       { emoji: "🍜", label: "후쿠오카", query: "후쿠오카 여행 시 꼭 알아야 할 정보는?" },
     ]},
   ],
+  th: [
+    { emoji: "🎭", label: "ประเพณี", sub: [
+      { emoji: "🍵", label: "พิธีชา", query: "วิธีเข้าร่วมพิธีชาญี่ปุ่น?" },
+      { emoji: "👘", label: "กิโมโน", query: "ควรรู้อะไรเกี่ยวกับการใส่กิโมโน?" },
+      { emoji: "🧘", label: "ซาเซ็น", query: "ควรรู้อะไรเกี่ยวกับการนั่งสมาธิซาเซ็น?" },
+      { emoji: "✍️", label: "การเขียน", query: "ควรรู้อะไรเกี่ยวกับการเขียนอักษรญี่ปุ่น?" },
+    ]},
+    { emoji: "🚕", label: "แท็กซี่", sub: [
+      { emoji: "🚕", label: "วิธีใช้", query: "วิธีใช้แท็กซี่ในญี่ปุ่น?" },
+      { emoji: "💴", label: "ค่าโดยสาร", query: "ค่าแท็กซี่ในญี่ปุ่นเท่าไหร่?" },
+      { emoji: "📱", label: "แอป", query: "แอปแท็กซี่ที่ใช้ได้ในญี่ปุ่น?" },
+      { emoji: "🤝", label: "ทิป", query: "ต้องให้ทิปคนขับแท็กซี่ในญี่ปุ่นไหม?" },
+    ]},
+    { emoji: "🏧", label: "เงิน", sub: [
+      { emoji: "🏧", label: "ATM", query: "ชาวต่างชาติใช้ ATM ในญี่ปุ่นอย่างไร?" },
+      { emoji: "💱", label: "แลกเงิน", query: "แลกเงินที่ไหนในญี่ปุ่น?" },
+      { emoji: "💳", label: "บัตรเครดิต", query: "ใช้บัตรเครดิตในญี่ปุ่นได้ไหม?" },
+      { emoji: "💴", label: "เงินสด", query: "ควรพกเงินสดเท่าไหร่ในญี่ปุ่น?" },
+    ]},
+    { emoji: "🚽", label: "ห้องน้ำ", sub: [
+      { emoji: "🚿", label: "ชักโครก", query: "วิธีใช้ชักโครกอัจฉริยะญี่ปุ่น?" },
+      { emoji: "🗺️", label: "หาห้องน้ำ", query: "หาห้องน้ำสาธารณะในญี่ปุ่นอย่างไร?" },
+      { emoji: "🧻", label: "มารยาท", query: "มารยาทการใช้ห้องน้ำในญี่ปุ่น?" },
+    ]},
+    { emoji: "📶", label: "อินเทอร์เน็ต", sub: [
+      { emoji: "📱", label: "ซิมการ์ด", query: "ซื้อซิมการ์ดในญี่ปุ่นอย่างไร?" },
+      { emoji: "📶", label: "Pocket WiFi", query: "เช่า Pocket WiFi ในญี่ปุ่นอย่างไร?" },
+      { emoji: "🆓", label: "WiFi ฟรี", query: "หา WiFi ฟรีในญี่ปุ่นได้ที่ไหน?" },
+    ]},
+    { emoji: "🏠", label: "ที่พัก", sub: [
+      { emoji: "🏯", label: "เรียวกัง", query: "มารยาทที่เรียวกังญี่ปุ่นคืออะไร?" },
+      { emoji: "🏨", label: "โรงแรม", query: "ควรรู้อะไรเกี่ยวกับการพักโรงแรมในญี่ปุ่น?" },
+      { emoji: "🏠", label: "แอร์บีแอนด์บี", query: "ควรรู้อะไรเกี่ยวกับ Airbnb ในญี่ปุ่น?" },
+      { emoji: "💤", label: "แคปซูลโฮเทล", query: "วิธีใช้แคปซูลโฮเทลในญี่ปุ่น?" },
+    ]},
+    { emoji: "🗣️", label: "ภาษา", sub: [
+      { emoji: "👋", label: "ประโยคพื้นฐาน", query: "ประโยคภาษาญี่ปุ่นที่นักท่องเที่ยวควรรู้?" },
+      { emoji: "🆘", label: "ขอความช่วยเหลือ", query: "ขอความช่วยเหลือเป็นภาษาญี่ปุ่นอย่างไร?" },
+      { emoji: "📱", label: "แอปแปลภาษา", query: "แอปแปลภาษาที่ดีที่สุดสำหรับญี่ปุ่น?" },
+    ]},
+    { emoji: "🎌", label: "เทศกาล", sub: [
+      { emoji: "🎆", label: "ดอกไม้ไฟ", query: "ควรรู้อะไรเกี่ยวกับเทศกาลดอกไม้ไฟญี่ปุ่น?" },
+      { emoji: "🏮", label: "แผงลอย", query: "เพลิดเพลินกับแผงลอยเทศกาลญี่ปุ่นอย่างไร?" },
+      { emoji: "💃", label: "บงโอโดริ", query: "บงโอโดริคืออะไรและเข้าร่วมอย่างไร?" },
+      { emoji: "⛩️", label: "ปีใหม่", query: "ควรรู้อะไรเกี่ยวกับการเฉลิมฉลองปีใหม่ญี่ปุ่น?" },
+    ]},
+    { emoji: "🌸", label: "ฤดูกาล", sub: [
+      { emoji: "🌸", label: "ฤดูใบไม้ผลิ", query: "ควรรู้อะไรเกี่ยวกับการเที่ยวญี่ปุ่นฤดูใบไม้ผลิ?" },
+      { emoji: "🌊", label: "ฤดูร้อน", query: "ควรรู้อะไรเกี่ยวกับการเที่ยวญี่ปุ่นฤดูร้อน?" },
+      { emoji: "🍁", label: "ฤดูใบไม้ร่วง", query: "ควรรู้อะไรเกี่ยวกับการเที่ยวญี่ปุ่นฤดูใบไม้ร่วง?" },
+      { emoji: "❄️", label: "ฤดูหนาว", query: "ควรรู้อะไรเกี่ยวกับการเที่ยวญี่ปุ่นฤดูหนาว?" },
+    ]},
+    { emoji: "🗾", label: "ภูมิภาค", sub: [
+      { emoji: "🗼", label: "โตเกียว", query: "ควรรู้อะไรสำหรับการเที่ยวโตเกียว?" },
+      { emoji: "⛩️", label: "เกียวโต", query: "ควรรู้อะไรสำหรับการเที่ยวเกียวโต?" },
+      { emoji: "🦌", label: "โอซาก้า", query: "ควรรู้อะไรสำหรับการเที่ยวโอซาก้า?" },
+      { emoji: "🕊️", label: "ฮิโรชิมา", query: "ควรรู้อะไรสำหรับการเที่ยวฮิโรชิมา?" },
+      { emoji: "🗻", label: "ภูเขาไฟฟูจิ", query: "ควรรู้อะไรเกี่ยวกับการเที่ยวภูเขาไฟฟูจิ?" },
+      { emoji: "❄️", label: "ฮอกไกโด", query: "ควรรู้อะไรสำหรับการเที่ยวฮอกไกโด?" },
+      { emoji: "🦌", label: "นารา", query: "ควรรู้อะไรสำหรับการเที่ยวนารา?" },
+      { emoji: "🌊", label: "โอกินาวา", query: "ควรรู้อะไรสำหรับการเที่ยวโอกินาวา?" },
+      { emoji: "🍜", label: "ฟุกุโอกะ", query: "ควรรู้อะไรสำหรับการเที่ยวฟุกุโอกะ?" },
+    ]},
+  ],
+  fr: [
+    { emoji: "🎭", label: "Traditions", sub: [
+      { emoji: "🍵", label: "Cérémonie du thé", query: "Comment participer à une cérémonie du thé japonaise?" },
+      { emoji: "👘", label: "Kimono", query: "Comment se comporter en portant un kimono?" },
+      { emoji: "🧘", label: "Zazen", query: "Que savoir sur la méditation zazen au Japon?" },
+      { emoji: "✍️", label: "Calligraphie", query: "Que savoir sur la calligraphie japonaise?" },
+    ]},
+    { emoji: "🚕", label: "Taxi", sub: [
+      { emoji: "🚕", label: "Utilisation", query: "Comment utiliser un taxi au Japon?" },
+      { emoji: "💴", label: "Tarif", query: "Combien coûtent les taxis au Japon?" },
+      { emoji: "📱", label: "Applications", query: "Quelles applications de taxi puis-je utiliser au Japon?" },
+      { emoji: "🤝", label: "Pourboire", query: "Faut-il donner un pourboire aux chauffeurs de taxi au Japon?" },
+    ]},
+    { emoji: "🏧", label: "Argent", sub: [
+      { emoji: "🏧", label: "DAB", query: "Comment utiliser les DAB au Japon en tant qu'étranger?" },
+      { emoji: "💱", label: "Change", query: "Où changer de l'argent au Japon?" },
+      { emoji: "💳", label: "Cartes", query: "Puis-je utiliser des cartes de crédit au Japon?" },
+      { emoji: "💴", label: "Espèces", query: "Combien d'espèces devrais-je avoir au Japon?" },
+    ]},
+    { emoji: "🚽", label: "Toilettes", sub: [
+      { emoji: "🚿", label: "Washlet", query: "Comment utiliser les toilettes japonaises à washlet?" },
+      { emoji: "🗺️", label: "En trouver", query: "Comment trouver des toilettes publiques au Japon?" },
+      { emoji: "🧻", label: "Étiquette", query: "Quelle est l'étiquette des toilettes au Japon?" },
+    ]},
+    { emoji: "📶", label: "Internet", sub: [
+      { emoji: "📱", label: "Carte SIM", query: "Comment obtenir une carte SIM au Japon?" },
+      { emoji: "📶", label: "Pocket WiFi", query: "Comment louer un Pocket WiFi au Japon?" },
+      { emoji: "🆓", label: "WiFi gratuit", query: "Où trouver du WiFi gratuit au Japon?" },
+    ]},
+    { emoji: "🏠", label: "Hébergement", sub: [
+      { emoji: "🏯", label: "Ryokan", query: "Quelles sont les règles d'étiquette dans un ryokan?" },
+      { emoji: "🏨", label: "Hôtel", query: "Que savoir sur les hôtels japonais?" },
+      { emoji: "🏠", label: "Airbnb", query: "Que savoir sur Airbnb au Japon?" },
+      { emoji: "💤", label: "Capsule", query: "Comment utiliser un hôtel capsule au Japon?" },
+    ]},
+    { emoji: "🗣️", label: "Langue", sub: [
+      { emoji: "👋", label: "Phrases utiles", query: "Quelles sont les phrases japonaises les plus utiles pour les touristes?" },
+      { emoji: "🆘", label: "À l'aide!", query: "Comment demander de l'aide en japonais?" },
+      { emoji: "📱", label: "Applications", query: "Quelles applications de traduction fonctionnent au Japon?" },
+    ]},
+    { emoji: "🎌", label: "Festivals", sub: [
+      { emoji: "🎆", label: "Feux d'artifice", query: "Que savoir sur les festivals de feux d'artifice japonais?" },
+      { emoji: "🏮", label: "Stands", query: "Comment profiter des stands de festival japonais?" },
+      { emoji: "💃", label: "Bon Odori", query: "Qu'est-ce que le Bon Odori et comment y participer?" },
+      { emoji: "⛩️", label: "Nouvel An", query: "Que savoir sur les célébrations du Nouvel An japonais?" },
+    ]},
+    { emoji: "🌸", label: "Saisons", sub: [
+      { emoji: "🌸", label: "Printemps", query: "Que savoir sur une visite au Japon au printemps?" },
+      { emoji: "🌊", label: "Été", query: "Que savoir sur une visite au Japon en été?" },
+      { emoji: "🍁", label: "Automne", query: "Que savoir sur une visite au Japon en automne?" },
+      { emoji: "❄️", label: "Hiver", query: "Que savoir sur une visite au Japon en hiver?" },
+    ]},
+    { emoji: "🗾", label: "Régions", sub: [
+      { emoji: "🗼", label: "Tokyo", query: "Que savoir absolument pour visiter Tokyo?" },
+      { emoji: "⛩️", label: "Kyoto", query: "Que savoir absolument pour visiter Kyoto?" },
+      { emoji: "🦌", label: "Osaka", query: "Que savoir absolument pour visiter Osaka?" },
+      { emoji: "🕊️", label: "Hiroshima", query: "Que savoir absolument pour visiter Hiroshima?" },
+      { emoji: "🗻", label: "Mont Fuji", query: "Que savoir sur la visite du Mont Fuji?" },
+      { emoji: "❄️", label: "Hokkaido", query: "Que savoir absolument pour visiter Hokkaido?" },
+      { emoji: "🦌", label: "Nara", query: "Que savoir absolument pour visiter Nara?" },
+      { emoji: "🌊", label: "Okinawa", query: "Que savoir absolument pour visiter Okinawa?" },
+      { emoji: "🍜", label: "Fukuoka", query: "Que savoir absolument pour visiter Fukuoka?" },
+    ]},
+  ],
 };
 
 const TRANSLATIONS = {
@@ -352,21 +662,6 @@ const TRANSLATIONS = {
     error: "对不起！出了点问题，请再试一次 🙏",
     sorry: "抱歉，我没能理解。请再试一次！",
   },
-  ko: {
-    title: "일본의 길", subtitle: "당신의 문화 가이드 🌸",
-    quick: "🌸 빠른", deep: "🍵 깊은",
-    placeholder: "일본에 대해 Kokoro에게 무엇이든 물어보세요...", send: "전송",
-    thinking: "Kokoro가 생각 중... 🌸",
-    freeLeft: (n, t) => `무료: 오늘 ${n} / ${t} 메시지 남음`,
-    limitTitle: "일일 한도 도달! 🌸", limitDesc: "오늘의 무료 메시지 5개를 모두 사용했습니다.",
-    weeklyPass: "주간 패스", weeklyPrice: "$3.99", weeklyDesc: "7일 무제한",
-    monthly: "월간", monthlyPrice: "$4.99", monthlyDesc: "무제한 + 깊은 모드",
-    getWeekly: "주간 패스 구매", getMonthly: "월간 구매", maybeLater: "나중에",
-    greeting: "안녕하세요! 🌸 저는 Kokoro, 일본 문화 가이드입니다. 무엇이든 물어보세요!",
-    other: "더보기", capture: "⬤ 촬영", analyze: "🔍 분석", retake: "다시 찍기",
-    error: "죄송합니다! 문제가 발생했습니다. 다시 시도해주세요 🙏",
-    sorry: "죄송합니다, 이해하지 못했습니다. 다시 시도해주세요!",
-  },
   "zh-tw": {
     title: "日本之道", subtitle: "您的文化嚮導 🌸",
     quick: "🌸 快速", deep: "🍵 深度",
@@ -381,6 +676,21 @@ const TRANSLATIONS = {
     other: "更多", capture: "⬤ 拍照", analyze: "🔍 分析", retake: "重拍",
     error: "對不起！出了點問題，請再試一次 🙏",
     sorry: "抱歉，我沒能理解。請再試一次！",
+  },
+  ko: {
+    title: "일본의 길", subtitle: "당신의 문화 가이드 🌸",
+    quick: "🌸 빠른", deep: "🍵 깊은",
+    placeholder: "일본에 대해 Kokoro에게 무엇이든 물어보세요...", send: "전송",
+    thinking: "Kokoro가 생각 중... 🌸",
+    freeLeft: (n, t) => `무료: 오늘 ${n} / ${t} 메시지 남음`,
+    limitTitle: "일일 한도 도달! 🌸", limitDesc: "오늘의 무료 메시지 5개를 모두 사용했습니다.",
+    weeklyPass: "주간 패스", weeklyPrice: "$3.99", weeklyDesc: "7일 무제한",
+    monthly: "월간", monthlyPrice: "$4.99", monthlyDesc: "무제한 + 깊은 모드",
+    getWeekly: "주간 패스 구매", getMonthly: "월간 구매", maybeLater: "나중에",
+    greeting: "안녕하세요! 🌸 저는 Kokoro, 일본 문화 가이드입니다. 무엇이든 물어보세요!",
+    other: "더보기", capture: "⬤ 촬영", analyze: "🔍 분석", retake: "다시 찍기",
+    error: "죄송합니다! 문제가 발생했습니다. 다시 시도해주세요 🙏",
+    sorry: "죄송합니다, 이해하지 못했습니다. 다시 시도해주세요!",
   },
   th: {
     title: "วิถีญี่ปุ่น", subtitle: "ไกด์วัฒนธรรมของคุณ 🌸",
@@ -425,9 +735,7 @@ function getDailyCount() {
       return 0;
     }
     return Math.min(stored.count || 0, DAILY_LIMIT);
-  } catch {
-    return 0;
-  }
+  } catch { return 0; }
 }
 
 function incrementDailyCount() {
@@ -438,9 +746,7 @@ function incrementDailyCount() {
     const count = current + 1;
     localStorage.setItem("woj_usage", JSON.stringify({ date: today, count }));
     return count;
-  } catch {
-    return 0;
-  }
+  } catch { return 0; }
 }
 
 function saveMessages(msgs) {
@@ -480,18 +786,14 @@ export default function App() {
   const bottomRef = useRef(null);
 
   const kokoroImg = loading
-  ? (thinkingFrame
-      ? (useReal ? "/images/kokoro-real-thinking.png" : "/images/kokoro-thinking.png")
-      : (useReal ? "/images/kokoro-real.png" : "/images/kokoro-chibi.png"))
-  : (useReal ? "/images/kokoro-real.png" : "/images/kokoro-chibi.png");
+    ? (thinkingFrame
+        ? (useReal ? "/images/kokoro-real-thinking.png" : "/images/kokoro-thinking.png")
+        : (useReal ? "/images/kokoro-real.png" : "/images/kokoro-chibi.png"))
+    : (useReal ? "/images/kokoro-real.png" : "/images/kokoro-chibi.png");
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
-  useEffect(() => {
-  setDailyCount(getDailyCount());
-}, []);
 
   useEffect(() => {
     saveMessages(messages);
@@ -501,6 +803,22 @@ export default function App() {
     setMessages([{ role: "assistant", content: TRANSLATIONS[language].greeting }]);
     setDailyCount(getDailyCount());
   }, [language]);
+
+  useEffect(() => {
+    setDailyCount(getDailyCount());
+  }, []);
+
+  useEffect(() => {
+    let interval;
+    if (loading) {
+      interval = setInterval(() => {
+        setThinkingFrame(prev => !prev);
+      }, 600);
+    } else {
+      setThinkingFrame(false);
+    }
+    return () => clearInterval(interval);
+  }, [loading]);
 
   useEffect(() => {
     if (showCamera) {
@@ -518,18 +836,6 @@ export default function App() {
       setCapturedImg(null);
     }
   }, [showCamera]);
-
-  useEffect(() => {
-  let interval;
-  if (loading) {
-    interval = setInterval(() => {
-      setThinkingFrame(prev => !prev);
-    }, 600);
-  } else {
-    setThinkingFrame(false);
-  }
-  return () => clearInterval(interval);
-}, [loading]);
 
   async function sendMessage(text) {
     const userText = text || input.trim();
@@ -668,18 +974,14 @@ export default function App() {
           <option value="th">🇹🇭 TH</option>
           <option value="fr">🇫🇷 FR</option>
         </select>
-         {(import.meta.env.DEV || import.meta.env.VITE_DEV_MODE === 'true') && (
-  <button
-    onClick={() => { 
-      localStorage.clear(); 
-      setDailyCount(0);
-      window.location.reload();
-    }}
-    style={{ fontSize: '10px', padding: '2px 6px', background: '#ff6b6b', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
-  >
-    DEV Reset
-  </button>
-)}
+        {(import.meta.env.DEV || import.meta.env.VITE_DEV_MODE === 'true') && (
+          <button
+            onClick={() => { localStorage.clear(); setDailyCount(0); window.location.reload(); }}
+            style={{ fontSize: '10px', padding: '2px 6px', background: '#ff6b6b', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+          >
+            DEV Reset
+          </button>
+        )}
       </header>
 
       <div className="mode-toggle">
@@ -710,7 +1012,7 @@ export default function App() {
           </div>
           <div className="kokoro-left">
             <button className="kokoro-toggle" onClick={() => setUseReal(!useReal)}>🔄</button>
-            <img src={kokoroImg} alt="Kokoro" className="kokoro-img" />
+            <img key={kokoroImg} src={kokoroImg} alt="Kokoro" className="kokoro-img" />
           </div>
         </div>
 
@@ -804,9 +1106,7 @@ export default function App() {
 
       <div className="input-area">
         {mode === "quick" && (
-          <div className="count-badge" key={dailyCount}>
-            {Math.max(0, DAILY_LIMIT - dailyCount)}/{DAILY_LIMIT}
-          </div>
+          <div className="count-badge" key={dailyCount}>{Math.max(0, DAILY_LIMIT - dailyCount)}/{DAILY_LIMIT}</div>
         )}
         <input
           className="input"
