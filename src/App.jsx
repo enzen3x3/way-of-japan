@@ -804,7 +804,9 @@ export default function App() {
 
       <div className="input-area">
         {mode === "quick" && (
-          <div className="count-badge">{Math.max(0, DAILY_LIMIT - dailyCount)}/{DAILY_LIMIT}</div>
+          <div className="count-badge" key={dailyCount}>
+            {Math.max(0, DAILY_LIMIT - dailyCount)}/{DAILY_LIMIT}
+          </div>
         )}
         <input
           className="input"
